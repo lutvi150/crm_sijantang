@@ -314,17 +314,15 @@ class Admin extends CI_Controller
         $pdf->AddPage();
         //seting jenis font yang di gunakan
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(20, 40, $pdf->image(base_url() . 'asset/img/rumah_kemasan_b.jpg', 115, 40, 150), 0, 0, 'C');
+        $pdf->Cell(20, 40, $pdf->image(base_url() . 'asset/img/.jpg', 115, 40, 150), 0, 0, 'C');
         //mencetak setting
-        $pdf->Cell(20, 7, $pdf->image(base_url() . 'asset/img/rumah_kemasan.jpg', $pdf->GetX(), $pdf->GetY(), 20), 0, 0, 'C');
-        $pdf->Cell(240, 6, 'RUMAH KEMASAN', 0, 1, 'C');
+        $pdf->Cell(20, 7, $pdf->image(base_url() . 'asset/img/.jpg', $pdf->GetX(), $pdf->GetY(), 20), 0, 0, 'C');
+        $pdf->Cell(240, 6, 'DASA WISMA SIJANTANG', 0, 1, 'C');
         $pdf->SetFont('Arial', 'B', 15);
         //mencetak setting
         $pdf->Cell(320, 6, 'DATA PELANGGAN YANG TERDAFTAR PADA SISTEM', 0, 1, 'C');
         $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(320, 5, 'Lima Kaum, Kabupaten Tanah Datar Sumatra Barat', 0, 1, 'C');
-        $pdf->Cell(320, 5, 'Telp. 0752-82077, Fax.0752-82803; e-mail; cs@rumahkemasan.com', 0, 1, 'C');
-        $pdf->Cell(320, 5, 'webesite: www.RumahKemasan.com', 0, 1, 'C');
+
         $pdf->Cell(340, 1, '', ':', 0, 1, 'C');
         $pdf->Cell(300, 5, '', 0, 1, 'C');
         //Membri spasi kEBawah
@@ -364,7 +362,7 @@ class Admin extends CI_Controller
 
         $pdf->Cell(0, 4, 'Batusangkar,' . date('d M Y'), 0, 1);
         $pdf->cell(280, 4, '', 0, 0);
-        $pdf->Cell(0, 4, 'Direktur Rumah Kemasan', 0, 1);
+        $pdf->Cell(0, 4, 'Direktur ', 0, 1);
         $pdf->cell(256, 6, '', 0, 0);
         $pdf->Cell(0, 6, ' ', 0, 1);
         $pdf->ln(20);
@@ -417,17 +415,12 @@ class Admin extends CI_Controller
         $pdf->AddPage();
         //seting jenis font yang di gunakan
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(20, 40, $pdf->image(base_url() . 'asset/img/rumah_kemasan_b.jpg', 115, 40, 150), 0, 0, 'C');
-        //mencetak setting
-        $pdf->Cell(20, 7, $pdf->image(base_url() . 'asset/img/rumah_kemasan.jpg', $pdf->GetX(), $pdf->GetY(), 20), 0, 0, 'C');
-        $pdf->Cell(240, 6, 'RUMAH KEMASAN', 0, 1, 'C');
+        $pdf->Cell(240, 6, '-', 0, 1, 'C');
         $pdf->SetFont('Arial', 'B', 15);
         //mencetak setting
         $pdf->Cell(320, 6, 'DATA PELANGGAN YANG TERDAFTAR PADA SISTEM', 0, 1, 'C');
         $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(320, 5, 'Lima Kaum, Kabupaten Tanah Datar Sumatra Barat', 0, 1, 'C');
-        $pdf->Cell(320, 5, 'Telp. 0752-82077, Fax.0752-82803; e-mail; cs@rumahkemasan.com', 0, 1, 'C');
-        $pdf->Cell(320, 5, 'webesite: www.RumahKemasan.com', 0, 1, 'C');
+      
         $pdf->Cell(340, 1, '', ':', 0, 1, 'C');
         $pdf->Cell(300, 5, '', 0, 1, 'C');
         //Membri spasi kEBawah
@@ -476,7 +469,7 @@ class Admin extends CI_Controller
         $pdf->Cell(0, 4, 'Batusangkar,' . date('d M Y'), 0, 1);
         $pdf->cell(50, 4, '', 0, 0);
         $pdf->cell(200, 4, 'Keterangan', 0, 0,'L');
-        $pdf->Cell(0, 4, 'Direktur Rumah Kemasan', 0, 1);
+        $pdf->Cell(0, 4, 'Direktur ', 0, 1);
         $pdf->cell(50, 4, '', 0, 0);
         $pdf->cell(206, 4, 'F : Status Pesanan Sudah Finish', 0, 1,'L');
         $pdf->cell(50, 4, '', 0, 0);
@@ -550,16 +543,13 @@ class Admin extends CI_Controller
         $pdf->AddPage();
         //seting jenis font yang di gunakan
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(20, 40, $pdf->image(base_url() . 'asset/img/rumah_kemasan_b.jpg', 115, 40, 150), 0, 0, 'C');
+        $pdf->Cell(20, 40, $pdf->image(base_url() . 'asset/img/crm_b.jpg', 115, 40, 150), 0, 0, 'C');
         //mencetak setting
-        $pdf->Cell(20, 7, $pdf->image(base_url() . 'asset/img/rumah_kemasan.jpg', $pdf->GetX(), $pdf->GetY(), 20), 0, 0, 'C');
-        $pdf->Cell(240, 6, 'RUMAH KEMASAN', 0, 1, 'C');
+        $pdf->Cell(20, 7, $pdf->image(base_url() . 'asset/img/crm.jpg', $pdf->GetX(), $pdf->GetY(), 20), 0, 0, 'C');
+        $pdf->Cell(240, 6, '-', 0, 1, 'C');
         $pdf->SetFont('Arial', 'B', 15);
         //mencetak setting
-        $pdf->Cell(320, 6, 'DATA BARANG YANG TERDAFTAR PADA SISTEM', 0, 1, 'C');
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(320, 5, 'Lima Kaum, Kabupaten Tanah Datar Sumatra Barat', 0, 1, 'C');
-        $pdf->Cell(320, 5, 'Telp. 0752-82077, Fax.0752-82803; e-mail; cs@rumahkemasan.com', 0, 1, 'C');
+    
         $pdf->Cell(320, 5, 'webesite: www.RumahKemasan.com', 0, 1, 'C');
         $pdf->Cell(340, 1, '', ':', 0, 1, 'C');
         $pdf->Cell(300, 5, '', 0, 1, 'C');
@@ -606,7 +596,7 @@ class Admin extends CI_Controller
         $pdf->cell(280, 10, '', 0, 0);
         $pdf->Cell(0, 4, 'Batusangkar,' . date('d M Y'), 0, 1);
         $pdf->cell(280, 4, '', 0, 0);
-        $pdf->Cell(0, 4, 'Direktur Rumah Kemasan', 0, 1);
+        $pdf->Cell(0, 4, 'Direktur ', 0, 1);
         $pdf->cell(256, 6, '', 0, 0);
         $pdf->Cell(0, 6, ' ', 0, 1);
         $pdf->ln(20);

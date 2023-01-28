@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="<?=base_url();?>assets/costume/costume-admin.css"> 
 	
 <script src="<?php echo base_url();?>assets/jquery/dist/jquery.min.js"></script>
+<script src="<?=base_url();?>assets/form-master/dist/jquery.form.min.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

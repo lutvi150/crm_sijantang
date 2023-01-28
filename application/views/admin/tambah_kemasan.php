@@ -156,8 +156,8 @@
 			<div class="modal-body">
 				<div class="form-group">
 				  <label for="">Upload Foto Produk</label>
-				  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-				  <small id="helpId" class="text-muted">Help text</small>
+				  <input type="file" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+				  <small id="helpId" style="color: red;" class="text-muted">Foto yang diizinkan hanya JPG atau PNG</small>
 				</div>
 			</div>
 			<div class="modal-footer">

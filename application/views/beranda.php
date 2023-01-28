@@ -59,10 +59,8 @@
 					<div class="row single-slide align-items-center d-flex">
 						<div class="col-lg-5 col-md-6">
 							<div class="banner-content">
-								<h1>Holland Bakery <br>Desain Baru!</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-									incididunt ut labore et
-									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+								<h1>Dasawisma Sijantang<br>New Produk!</h1>
+								<p>Silahkan Pilih prouk sesuai kebutuhan anda</p>
 								<div class="add-bag d-flex align-items-center">
 									<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
 									<span class="add-text text-uppercase">Add to Bag</span>
@@ -78,11 +76,9 @@
 					<!-- single-slide -->
 					<div class="row single-slide">
 						<div class="col-lg-5 col-md-6">
-							<div class="banner-content">
-								<h1>Holland Bakery <br>Desain Baru!</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-									incididunt ut labore et
-									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+						<div class="banner-content">
+								<h1>Dasawisma Sijantang<br>New Produk!</h1>
+								<p>Silahkan Pilih prouk sesuai kebutuhan anda</p>
 								<div class="add-bag d-flex align-items-center">
 									<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
 									<span class="add-text text-uppercase">Add to Bag</span>

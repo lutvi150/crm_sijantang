@@ -101,7 +101,7 @@
  					</div>
  					<div class="box-body">
  						<div class="col-md-12 text-center">
- 							<h1><marquee behavior="" direction="">Rumah Kemasan, Solusi Terbaik Untuk anda yang ingin buat kemasan untuk produk anda </marquee></h1>
+ 							<h1><marquee behavior="" direction="">-</marquee></h1>
 
  						</div>
  					</div>
