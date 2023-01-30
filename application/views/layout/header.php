@@ -30,11 +30,17 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?=base_url();?>assets/costume/costume-admin.css"> 
 	
-<script src="<?php echo base_url();?>assets/jquery/dist/jquery.min.js"></script>
+<script src="<?=base_url();?>assets/jquery/jquery-3.6.3.min.js"></script>
 <script src="<?=base_url();?>assets/form-master/dist/jquery.form.min.js"></script>
+<script src="<?=base_url();?>assets/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+	<style>
+		.text-error{
+			color:red;
+		}
+	</style>
 <div class="wrapper">
 
   <header class="main-header">

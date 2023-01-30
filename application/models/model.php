@@ -56,6 +56,8 @@ class model extends CI_Model
     public function create_data($tabel, $data)
     {
         $this->db->insert($tabel, $data);
+		$insert_id=$this->db->insert_id();
+		return $insert_id;
     }
     // perintah mencari data
     public function find_data($tabel, $id_tabel, $id)

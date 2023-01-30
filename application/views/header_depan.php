@@ -86,7 +86,7 @@
 							</li>
 							<?php if ($this->session->userdata('logged_in') == true) : ?>
 								<?php if ($this->session->userdata('level') == 'pelanggan') : ?>
-									<li class="nav-item"><a class="nav-link" href="<?= base_url(); ?>pelanggan/uniq_request">Uniq Request</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= base_url(); ?>pelanggan/chat">Chat Admin</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= base_url(); ?>pelanggan/menu_anda">Menu Anda</a></li>
 
 									<li class="nav-item"><a class="nav-link" href="#"><?= $nama ?></a></li>

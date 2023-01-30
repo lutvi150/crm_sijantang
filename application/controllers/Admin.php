@@ -6,6 +6,9 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('pdf');
+		$this->load->model('ModelProduk','produk');
+		$this->load->library('form_validation');
+		
         date_default_timezone_set('Asia/Jakarta');
         if ($this->session->userdata('logged_in') !== true) {
             $this->session->set_flashdata('error', 'Maaf hak akses anda di tolak');
@@ -26,7 +29,7 @@ class Admin extends CI_Controller
     }
     public function index()
     {
-        $data['jumlah_pelanggan']=$this->model->get_data('tb_barang','id_barang','ASC')->num_rows();
+        $data['jumlah_pelanggan']=$this->model->get_data('tb_produk','id_barang','ASC')->num_rows();
         $data['jumlah_transaksi']=$this->model->get_data('tb_transaksi','id_transaksi','ASC')->num_rows();
         $data['jumlah_user']=$this->model->find_data('tb_user','level','pelanggan')->num_rows();
         $total_transaksi=$this->model->find_data('tb_transaksi','status','F');
@@ -50,18 +53,90 @@ class Admin extends CI_Controller
     public function barang()
     {
 
-        $data['kemasan'] = $this->model->get_data('tb_barang', 'id_barang', 'desc')->result();
+        $data['barang'] = $this->produk->get_produk();
         $this->menu('admin/barang', $data);
     }
-    public function tambah_kemasan()
+	// use for upload image produk
+	public function upload_foto_produk(Type $var = null)
+	{
+		
+		$config['upload_path'] = './upload/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['encrypt_name']=true;
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload('foto_produk')){
+			$response = ['status'=>'failed','error' => $this->upload->display_errors()];
+		}
+		else{
+			$data= $this->upload->data();
+			$this->model->update_data('tb_foto_produk','id_produk',$this->input->post('id_produk'),['foto_unggulan'=>0]);
+			$response = ['status'=>'success'];
+			$insert=[
+				'id_produk'=>$this->input->post('id_produk'),
+				'foto_produk'=>'upload/'.$data['file_name'],
+				'foto_unggulan'=>1,
+			];
+			$this->model->create_data('tb_foto_produk',$insert);
+		}
+		echo json_encode($response);
+		
+	}
+	// function get image
+	public function get_foto_produk(Type $var = null)
+	{
+		$id_produk=$this->input->post('id_produk');
+		$getFoto=$this->model->find_data('tb_foto_produk','id_produk',$id_produk)->result();
+		echo json_encode($getFoto);
+	}
+	// remove foto produk
+	public function remove_foto_produk(Type $var = null)
+	{
+		$id_foto_produk=$this->input->post('id_foto_produk');
+		$getFoto=$this->model->find_data('tb_foto_produk','id_foto_produk',$id_foto_produk)->row();
+		if (file_exists(base_url().$getFoto->foto_produk)) {
+			unlink(base_url().$getFoto->foto_produk);
+		}
+		$this->model->delete_data('tb_foto_produk','id_foto_produk',$id_foto_produk);
+		$response=[
+			'status'=>'success'
+		];
+		echo json_encode($response);
+	}
+	// make the foto featured
+	public function jadikan_foto_unggulan(Type $var = null)
+	{
+		$id_produk=$this->input->post('id_produk');
+		$id_foto_produk=$this->input->post('id_foto_produk');
+		$this->model->update_data('tb_foto_produk','id_produk',$id_produk,['foto_unggulan'=>0]);
+		$this->model->update_data('tb_foto_produk','id_foto_produk',$id_foto_produk,['foto_unggulan'=>1]);
+		echo json_encode(['status'=>'success']);
+	}
+    public function tambah_produk()
     {
-        $this->menu('admin/tambah_kemasan', 'a');
+		$insert=[
+			'nama_produk'=>'-',
+			'keterangan'=>'-',
+			'jenis'=>'-',
+			'harga_jual'=>0,
+			'harga_modal'=>0,
+			'satuan'=>'-',
+			'stock'=>0
+		];
+		$checkData=$this->model->find_data('tb_produk','nama_produk','-')->row();
+		if ($checkData==null) {
+			$id=$this->model->create_data('tb_produk',$insert);
+		}else{
+			$id=$checkData->id_produk;
+		}
+		$data['id']=$id;
+        $this->menu('admin/tambah_produk', $data);
     }
     // untuk hapus data barang
     public function hapus_data_barang()
     {
         $id = $this->input->post('id_barang');
-        $this->model->delete_data('tb_barang', 'id_barang', $id);
+        $this->model->delete_data('tb_produk', 'id_barang', $id);
         $this->session->set_flashdata('success', 'Data Kemasan berhasil di hapus');
         redirect('admin/barang');
     }
@@ -177,27 +252,63 @@ class Admin extends CI_Controller
         echo json_encode($data);
     }
     // simpan kemasan
-    public function simpan_kemasan()
+    public function simpan_produk()
     {
-        $foto = $this->upload('foto');
-        if ($foto == 'error') {
-            $this->session->set_flashdata('error', 'Foto Tidak sesui dengan sistem');
-            redirect('admin/tambah_kemasan');
+		$id_produk=$this->input->post('id_produk');
+		$checkFoto=$this->model->find_data('tb_foto_produk','id_produk',$id_produk)->row();
+        if ($checkFoto==null) {
+			$response=[
+				'status'=>'foto produk not found',
+				'msg'=>'Tidak bisa di simpan, karena tidak ada foto produk',
+			];
         } else {
+			$this->form_validation->set_rules('nama', 'nama', 'trim|required',[
+				'required'=>'Nama Tidak boleh kosong'
+			]);			
+			$this->form_validation->set_rules('jenis', 'Jenis', 'trim|required',[
+				'required'=>'Jenis Tidak Boleh kosong'
+			]);$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required',[
+				'required'=>'Satuan Tidak boleh kosong'
+			]);$this->form_validation->set_rules('harga_jual', 'Harga Jual', 'trim|required|numeric',[
+				'required'=>'Harga Jual Tidak boleh kosong',
+				'numeric'=>'Harga Jual harus berupa angka'
+			]);$this->form_validation->set_rules('harga_modal', 'Harga Modal', 'trim|required|numeric',[
+				'required'=>'Harga Modal Tidak boleh kosong',
+				'numeric'=>'Harga Modal harus berupa angka'
+			]);$this->form_validation->set_rules('keterangan', 'Keterangan', 'trim|required',[
+				'required'=>'Keterangan Tidak boleh kosong'
+			]);$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required',[
+				'required'=>'Satuan Tidak boleh kosong'
+			]);$this->form_validation->set_rules('stock', 'Stock', 'trim|required|numeric',[
+				'required'=>'Stock Tidak boleh kosong',
+				'numeric'=>'Stoc harus berupa angka',
+			]);
+			
+			if ($this->form_validation->run() == false) {
+				$response=[
+					'status'=>'validation failed',
+					'msg'=>$this->form_validation->error_array(),
+				];
+			} else {
 
-            $data =
+				$data =
                 [
-                'nama' => $this->input->post('nama'),
+                'nama_produk' => $this->input->post('nama'),
                 'jenis' => $this->input->post('jenis'),
                 'satuan' => $this->input->post('satuan'),
-                'harga' => $this->input->post('harga'),
-                'detail' => $this->input->post('detail'),
-                'foto' => $foto,
+                'harga_jual' => $this->input->post('harga_jual'),
+				'harga_modal'=>$this->input->post('harga_modal'),
+                'keterangan' => $this->input->post('keterangan'),
+
             ];
-            $this->model->create_data('tb_barang', $data);
-            $this->session->set_flashdata('success', 'Kemasan Berhasil di Tambahkan Ke Database');
-            redirect('admin/tambah_kemasan');
-        }
+            $this->model->update_data('tb_produk','id_produk',$id_produk, $data);
+			$response=[
+				'status'=>'success',
+				'msg'=>'Data produk berhasil di tambahkan',
+			];
+			}
+		}
+		echo json_encode($response);
     }
     public function simpan_kemasan_edit($id)
     {
@@ -224,7 +335,7 @@ class Admin extends CI_Controller
             ];
 
         }
-        $this->model->update_data('tb_barang', 'id_barang', $id, $data);
+        $this->model->update_data('tb_produk', 'id_barang', $id, $data);
         $this->session->set_flashdata('success', 'Kemasan Berhasil di Update');
         redirect('admin/barang');
     }
@@ -232,7 +343,7 @@ class Admin extends CI_Controller
     public function detail_produk()
     {
         $id = $this->input->get('id');
-        $data = $this->model->find_data('tb_barang', 'id_barang', $id)->row_array();
+        $data = $this->model->find_data('tb_produk', 'id_barang', $id)->row_array();
         echo json_encode($data);
     }
     // data user
@@ -494,9 +605,9 @@ class Admin extends CI_Controller
 
         $pdf->Output();
     }
-    public function edit_kemasan($id)
+    public function edit_produk($id)
     {
-        $data = $this->model->find_data('tb_barang', 'id_barang', $id)->row_array();
+        $data = $this->model->find_data('tb_produk', 'id_barang', $id)->row_array();
         $this->menu('admin/edit_kemasan', $data);
     }
 
@@ -532,7 +643,7 @@ class Admin extends CI_Controller
     public function cetak_barang($status)
     {
         if ($status=='semua') {
-            $barang = $this->model->get_data('tb_barang','id_barang','DESC')->result_array();
+            $barang = $this->model->get_data('tb_produk','id_barang','DESC')->result_array();
             $status_data='Semua Data';
         } else {
             # code...
