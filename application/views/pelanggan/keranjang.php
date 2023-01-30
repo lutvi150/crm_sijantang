@@ -18,17 +18,17 @@
 	<div class="container">
 		<div class="cart_inner">
 			<div class="table-responsive">
-				<?php if ($this->session->userdata('error')):?>
+				<?php if ($this->session->userdata('error')): ?>
 				<div id="message_error" class="alert alert-danger alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<h4><i class="icon fa fa-ban"></i> Maaf !</h4>
-					<?php echo $this->session->userdata('error');?>
+					<?php echo $this->session->userdata('error'); ?>
 				</div>
-				<?php elseif ($this->session->userdata('success')):?>
+				<?php elseif ($this->session->userdata('success')): ?>
 				<div id="message_success" class="alert alert-success alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<h4><i class="icon fa fa-check"></i> Success !</h4>
-					<?php echo $this->session->userdata('success');?>
+					<?php echo $this->session->userdata('success'); ?>
 				</div>
 				<?php endif;?>
 				<form action="<?=base_url();?>controller/proses_transaksi" method="post">
@@ -50,15 +50,15 @@
 							<td>
 								<div class="media">
 									<div class="d-flex">
-										<img class="gambar-keranjang" src="<?=base_url($value['foto'])?>" alt="">
+										<img class="gambar-keranjang" src="<?=base_url($value['foto_produk'])?>" alt="">
 									</div>
 									<div class="media-body">
-										<p><?=$value['nama']?></p>
+										<p><?=$value['nama_produk']?></p>
 									</div>
 								</div>
 							</td>
 							<td>
-								<h5>Rp. <?=number_format($value['harga'])?></h5>
+								<h5>Rp. <?=number_format($value['harga_jual'])?></h5>
 							</td>
 							<td>
 								<div class="product_count">
@@ -92,9 +92,9 @@
 								<div class="shipping_box">
 
 									<h6>Pilih Status <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-									<select name="status_bayar" class="shipping_select" id="jenis_ambil">
-										<option value="1">Kirim</option>
+									<select name="status_bayar" onchange="checkShipping()" class="shipping_select" id="jenis_ambil">
 										<option value="2">Ambil Di Tempat</option>
+										<option value="1">Kirim</option>
 									</select>
 									<div id="isi_jenis_ambil">
 
@@ -105,8 +105,24 @@
 
 								</div>
 							</td>
+							<td></td>
+						</tr>
+						<tr hidden class="pengiriman">
+							<td colspan="2" ></td>
+							<td>	<h5>Nama Penerima</h5></td>
+							<td><input type="text" value="<?=$user->nama?>" class="form-control" name="nama_penerima" ></td>
 						</tr>
 
+						<tr hidden class="pengiriman">
+							<td colspan="2" ></td>
+							<td>	<h5>Nomor Kontak</h5></td>
+							<td><input type="text" class="form-control" name="nomor_kontak" value="<?=$user->no_hp?>" ></td>
+						</tr>
+						<tr hidden class="pengiriman">
+							<td colspan="2"></td>
+							<td> <h5>Alamat Penerima</h5> </td>
+							<td> <textarea name="alamat" id=""  class="form-control" cols="30" rows="10"><?=$user->alamat?></textarea></td>
+						</tr>
 						<tr>
 							<td>
 
@@ -118,8 +134,8 @@
 								<h5>Total Keseluruhan</h5>
 							</td>
 							<td>
-								<?php if ($status_data=='1') {
-    								echo "<h5 ><div id='total'>Rp. ".number_format($total_belanja)."</div></h5>";
+								<?php if ($status_data == '1') {
+    echo "<h5 ><div id='total'>Rp. " . number_format($total_belanja) . "</div></h5>";
 }
 ?>
 							</td>
@@ -165,7 +181,7 @@
 							</td>
 							<td>
 								<?php if ($status_data == '1') {
-    echo "<h5><div id='terbilang'>".$terbilang."</div></h5>";
+    echo "<h5><div id='terbilang'>" . $terbilang . "</div></h5>";
 }?>
 							</td>
 						</tr>
@@ -182,13 +198,13 @@
 							<td>
 								<div class="checkout_btn_inner d-flex align-items-center">
 									<a class="gray_btn" href="<?=base_url();?>">Lanjut Belanja</a>
-									<?php if ($status_data=='1'):?>
+									<?php if ($status_data == '1'): ?>
 									<button class="primary-btn" type="submit" >Proses
 										Belanja</button>
-									<?php elseif ($status_data=='0'):?>
+									<?php elseif ($status_data == '0'): ?>
 									<a class="primary-btn belum-belanja" href="#">Proses
 										Belanja</a>
-									<?php endif; ?>
+									<?php endif;?>
 								</div>
 							</td>
 						</tr>
@@ -273,3 +289,14 @@
 		</div>
 	</div>
 </div>
+<script>
+	function checkShipping() {
+		let id=$("#jenis_ambil").children("option:selected").val();
+		console.log('id');
+		if (id==1) {
+			$(".pengiriman").removeAttr('hidden');;
+		} else{
+			$(".pengiriman").attr('hidden',true);
+		}
+	 }
+</script>

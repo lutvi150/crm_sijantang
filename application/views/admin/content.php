@@ -101,7 +101,7 @@
  					</div>
  					<div class="box-body">
  						<div class="col-md-12 text-center">
- 							<h1>-</h1>
+ 							<h1>Selamat Datang di <?=$this->config->item('app_name')?></h1>
 
  						</div>
  					</div>

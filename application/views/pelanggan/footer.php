@@ -16,54 +16,54 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo base_url();?>assets/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="<?php echo base_url();?>assets/jquery-ui/jquery-ui.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- Bootstrap 3.3.7 -->
 
-<script src="<?php echo base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/chart.js/Chart.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/chart.js/Chart.js"></script>
 <!-- FastClick -->
-<script src="<?php echo base_url();?>assets/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo base_url(); ?>assets/fastclick/lib/fastclick.js"></script>
 <!-- Sparkline -->
 
-<script src="<?php echo base_url();?>assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="<?php echo base_url();?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="<?php echo base_url();?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>assets/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-knob/dist/jquery.knob.min.js"></script>
 
 <!-- daterangepicker -->
-<script src="<?php echo base_url();?>assets/moment/min/moment.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/moment/min/moment.min.js"></script>
 
 <!-- Timepicker -->
-<script src="<?php echo base_url();?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<script src="<?php echo base_url();?>assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="<?php echo base_url();?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="<?php echo base_url();?>assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- AdminLTE App -->
-<script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
-	
+
 	$('#tanggal_perhari').datepicker();
 	$('#datepicker3').datepicker();
-	$('#timepickermodal').timepicker();
+	// $('#timepickermodal').timepicker();
 
-	
+
 	$('#datepicker1').datepicker({
 		autoclose: true
 	});
 	// sudah ada desain
-	$('.sudah-ada').click(function (e) { 
+	$('.sudah-ada').click(function (e) {
 		let id=$(this).attr('data');
 		$.ajax({
 			type: "GET",
@@ -99,7 +99,7 @@
 	// setuju transaksi
 	$('.setuju-transaksi').click(function (e) {
 		let id=$(this).attr('data');
-		$('#form_setuju_transaksi').attr('action',id); 
+		$('#form_setuju_transaksi').attr('action',id);
 		$('#setuju_transaksi').modal('show');
 	});
 	$('.konfirmasi').click(function (e) {
@@ -109,7 +109,7 @@
 		$('#konfirmasi').modal('show');
 	});
 	// untuk melihat detail pesanan
-	$('.detail-pesanan').click(function (e) { 
+	$('.detail-pesanan').click(function (e) {
 		var id=$(this).attr('data');
 		$.ajax({
 			type: "GET",
@@ -117,19 +117,20 @@
 			data: {"id":id},
 			dataType: "json",
 			success: function (response) {
-				console.log(response);
-				
+
+
+
 		$('#detail_pesanan').modal('show');
 			}
 		});
 	});
 	// untuk upload bukti bayar
-	$('.upload-bukti').click(function (e) { 
+	$('.upload-bukti').click(function (e) {
 		var id=$(this).attr('data');
 		$('#nomor_transaksi').val(id);
 		$('#upload_bukti').modal('show');
 	});
-	$('.detail-produk').click(function (e) { 
+	$('.detail-produk').click(function (e) {
 		var id=$(this).attr('data');
 		$.ajax({
 			type: "GET",
@@ -138,12 +139,12 @@
 			dataType: "JSON",
 			success: function (response) {
 				console.log(response);
-		$('#text_detail_produk').text(response.detail);		
+		$('#text_detail_produk').text(response.detail);
 		$('#detail_produk').modal('show');
 			}
 		});
 	});
-	$('.lihat-foto').click(function (e) { 
+	$('.lihat-foto').click(function (e) {
 		var id =$(this).attr('data');
 		$.ajax({
 			type: "GET",
@@ -178,7 +179,7 @@
 
 	$('.example1').DataTable();
 	// tampila diagram
-	
+
 
 </script>
 <script>

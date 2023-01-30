@@ -23,7 +23,7 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<form action="<?php echo base_url(); ?>admin/simpan_produk/store" id="store-produk" method="post"
+				<form action="<?php echo base_url(); ?>admin/simpan_produk/update" id="store-produk" method="post"
 					class="form-horizontal ">
 					<?php if ($this->session->userdata('error')): ?>
 					<div id="message_error" class="alert alert-danger alert-dismissible">
@@ -44,44 +44,44 @@
 								<div class="box-body">
 									<div class="form-group">
 										<label for="">Nama Produk</label>
-										<input type="text" class="form-control" id="nama" name="nama"
+										<input type="text" value="<?=$nama_produk?>" class="form-control" id="nama" name="nama"
 											placeholder="Nama Produk">
 											<span class="text-error enama"></span>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Jenis</label>
-										<input type="text" required name="jenis" id="jenis" class="form-control"
+										<input type="text" value="<?=$jenis?>" required name="jenis" id="jenis" class="form-control"
 											placeholder="Jenis">
 											<span class="text-error ejenis"></span>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Harga Modal</label>
-										<input type="text" required name="harga_modal" id="harga_modal"
+										<input type="text" required name="harga_modal" id="harga_modal" value="<?=$harga_modal?>"
 											class="form-control" placeholder="Harga Modal">
 											<span class="text-error eharga_modal"></span>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label">Harga Jual</label>
-										<input type="text" required name="harga_jual" id="harga_jual" class="form-control"
+										<input type="text" required name="harga_jual" id="harga_jual" value="<?=$harga_modal?>" class="form-control"
 											placeholder="Harga Jual">
 											<span class="text-error eharga_jual"></span>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Keterangan</label>
 										<textarea name="keterangan" id="keterangan" class="form-control" cols="30"
-											rows="10">Isi dengan detail Keterangan Produk</textarea>
+											rows="10"><?=$keterangan?></textarea>
 											<span class="text-error eketerangan"></span>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Satuan</label>
-										<input type="text" required name="satuan" id="satuan" class="form-control"
+										<input type="text" required name="satuan" id="satuan" value="<?=$keterangan?>" class="form-control"
 											placeholder="Satuan Pemesanan">
 											<span class="text-error esatuan"></span>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Stock</label>
-										<input type="number" required name="stock" id="stock" class="form-control"
+										<input type="number" required name="stock" value="<?=$stock?>" id="stock" class="form-control"
 											placeholder="Stock Barang">
 											<span class="text-error estock"></span>
 									</div>
@@ -193,7 +193,7 @@
 <!-- Button trigger modal -->
 <script>
 	let baseUrl = "<?=base_url();?>";
-	let id = "<?=$id?>";
+	let id = "<?=$id_produk?>";
 	$(document).ready(function () {
 		get_image();
 	});

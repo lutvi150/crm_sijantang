@@ -101,7 +101,7 @@
  					</div>
  					<div class="box-body">
  						<div class="col-md-12 text-center">
- 							<h1><marquee behavior="" direction="">-</marquee></h1>
+ 							<h1><marquee behavior="" direction="">Selamat Datang di <?=$this->config->item('app_name')?></marquee></h1>
 
  						</div>
  					</div>

@@ -32,7 +32,7 @@ class model extends CI_Model
         } else {
             $no = "0001";
         }
-        return 'BB'.date('dmY') . $no;
+        return 'BB' . date('dmY') . $no;
     }
     // mengambil data
     public function get_data($tabel, $order_reference, $order)
@@ -56,8 +56,8 @@ class model extends CI_Model
     public function create_data($tabel, $data)
     {
         $this->db->insert($tabel, $data);
-		$insert_id=$this->db->insert_id();
-		return $insert_id;
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
     }
     // perintah mencari data
     public function find_data($tabel, $id_tabel, $id)
@@ -93,20 +93,20 @@ class model extends CI_Model
     {
         $this->db->from('tb_user');
         $this->db->join('tb_data_diri_user', 'tb_data_diri_user.username = tb_user.username');
-        $this->db->where('tb_user.level','pelanggan');
-         return $this->db->get();
-                
+        $this->db->where('tb_user.level', 'pelanggan');
+        return $this->db->get();
+
     }
     // model get data user
     public function get_data_user_per($id)
     {
         $this->db->from('tb_user');
         $this->db->join('tb_data_diri_user', 'tb_data_diri_user.username = tb_user.username');
-        $this->db->where('tb_user.level','pelanggan');
+        $this->db->where('tb_user.level', 'pelanggan');
         $this->db->where('tgl_registrasi', $id);
-        
-         return $this->db->get();
-                
+
+        return $this->db->get();
+
     }
     // tambahan fungsi
     public function ambil_data_user($username)
@@ -114,14 +114,17 @@ class model extends CI_Model
         $this->db->from('tb_user');
         $this->db->join('tb_data_diri_user', 'tb_data_diri_user.username = tb_user.username');
         $this->db->where('tb_user.username', $username);
-        
+
         return $this->db->get();
     }
     // data keranjang
     public function data_keranjang($id)
     {
         $this->db->from('tb_keranjang');
-        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_keranjang.id_barang');
+        $this->db->join('tb_produk', 'tb_produk.id_produk = tb_keranjang.id_produk');
+        $this->db->join('tb_foto_produk', 'tb_produk.id_produk = tb_foto_produk.id_produk', 'left');
+        $this->db->order_by('tb_produk.id_produk', 'desc');
+        $this->db->where('tb_foto_produk.foto_unggulan', 1);
         $this->db->where('id_user', $id);
         $this->db->where('status_item', 'Draf');
         $this->db->order_by('id_keranjang', 'desc');
@@ -132,7 +135,7 @@ class model extends CI_Model
         $this->db->from('tb_transaksi');
         $this->db->join('tb_user', 'tb_user.username = tb_transaksi.id_user');
         $this->db->join('tb_data_diri_user', 'tb_data_diri_user.username = tb_user.username');
-        
+
         return $this->db->get();
     }
     public function detail_transaksi($id)
@@ -146,32 +149,31 @@ class model extends CI_Model
     public function detail_barang_dipesan($id)
     {
         $this->db->from('tb_keranjang');
-        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_keranjang.id_barang');
+        $this->db->join('tb_produk', 'tb_produk.id_produk = tb_keranjang.id_produk');
         $this->db->where('nomor_transaksi', $id);
         $this->db->order_by('id_keranjang', 'desc');
         return $this->db->get();
     }
-    public function transaksi_pertahun($tahun,$status)
+    public function transaksi_pertahun($tahun, $status)
     {
         $this->db->from('tb_transaksi');
         $this->db->join('tb_user', 'tb_user.username = tb_transaksi.id_user');
         $this->db->join('tb_data_diri_user', 'tb_data_diri_user.username = tb_user.username');
-        if ($status=='pertahun') {
+        if ($status == 'pertahun') {
             $this->db->where('SUBSTRING(tb_transaksi.tgl_transaksi,7,4)', $tahun);
-        } else if ($status=='bulan') {
+        } else if ($status == 'bulan') {
             $this->db->where('SUBSTRING(tb_transaksi.tgl_transaksi,4,7)', $tahun);
-        }elseif ($status=='semua') {
-           
+        } elseif ($status == 'semua') {
+
         }
         return $this->db->get();
     }
-    public function jml_tran_proses($id,$jenis)
+    public function jml_tran_proses($id, $jenis)
     {
         $this->db->from('tb_transaksi');
-       $this->db->where('status', $jenis);
-       $this->db->where('id_user', $id);
-       return $this->db->get();
+        $this->db->where('status', $jenis);
+        $this->db->where('id_user', $id);
+        return $this->db->get();
     }
-
 
 }

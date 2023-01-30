@@ -11,33 +11,33 @@
 </div>
 </div>
 
-<script src="<?= base_url(); ?>assets/js/vendor/jquery-2.2.4.min.js"></script>
+<script src="<?=base_url();?>assets/js/vendor/jquery-2.2.4.min.js"></script>
 <!-- bootsrap js -->
-<script src="<?= base_url(); ?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/vendor/popper.js">
+<script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/js/vendor/popper.js">
 </script>
-<script src="<?= base_url(); ?>assets/js/vendor/bootstrap.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.ajaxchimp.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.nice-select.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.sticky.js"></script>
-<script src="<?= base_url(); ?>assets/js/nouislider.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/jquery.magnific-popup.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/owl.carousel.min.js"></script>
+<script src="<?=base_url();?>assets/js/vendor/bootstrap.min.js"></script>
+<script src="<?=base_url();?>assets/js/jquery.ajaxchimp.min.js"></script>
+<script src="<?=base_url();?>assets/js/jquery.nice-select.min.js"></script>
+<script src="<?=base_url();?>assets/js/jquery.sticky.js"></script>
+<script src="<?=base_url();?>assets/js/nouislider.min.js"></script>
+<script src="<?=base_url();?>assets/js/jquery.magnific-popup.min.js"></script>
+<script src="<?=base_url();?>assets/js/owl.carousel.min.js"></script>
 <!-- ck editor -->
-<script src="<?= base_url(); ?>assets/ckeditor/ckeditor.js"></script>
+<script src="<?=base_url();?>assets/ckeditor/ckeditor.js"></script>
 <!--gmaps Js-->
-<script src="<?= base_url(); ?>assets/js/gmaps.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/main.js"></script>
+<script src="<?=base_url();?>assets/js/gmaps.min.js"></script>
+<script src="<?=base_url();?>assets/js/main.js"></script>
 <script>
 	// pilih jenis status
-	$("#jenis_ambil").change(function(e) {
+	$("#sjenis_ambil").change(function(e) {
 		let id = $(this).children("option:selected").val();
 		let html = '';
 		let html2 = ``;
 		if (id == '1') {
 			$.ajax({
 				type: "GET",
-				url: "<?= base_url(); ?>controller/provinsi",
+				url: "<?=base_url();?>controller/provinsi",
 				data: "data",
 				dataType: "JSON",
 				success: function(response) {
@@ -58,7 +58,7 @@
 						let html4 = ``;
 						$.ajax({
 							type: "GET",
-							url: "<?= base_url(); ?>controller/kabupaten",
+							url: "<?=base_url();?>controller/kabupaten",
 							data: {
 								"id_prov": id_prov
 							},
@@ -84,7 +84,7 @@
 									let html7 = ``;
 									$.ajax({
 										type: "GET",
-										url: "<?= base_url(); ?>controller/kecamatan",
+										url: "<?=base_url();?>controller/kecamatan",
 										data: {
 											"id_kab": id_kab
 										},
@@ -114,7 +114,7 @@
 												console.log(tar);
 												$.ajax({
 													type: "GET",
-													url: "<?= base_url(); ?>controller/tarif_kecamatan",
+													url: "<?=base_url();?>controller/tarif_kecamatan",
 													data: {
 														"tar": tar
 													},
@@ -143,7 +143,7 @@
 
 															$.ajax({
 																type: "GET",
-																url: "<?= base_url(); ?>controller/terbilang_keranjang",
+																url: "<?=base_url();?>controller/terbilang_keranjang",
 																data: {
 																	"angka": terif
 																},
@@ -185,7 +185,7 @@
 		let id = $(this).children('option:selected').val();
 		$.ajax({
 			type: "GET",
-			url: "<?= base_url(); ?>controller/data_kabupaten",
+			url: "<?=base_url();?>controller/data_kabupaten",
 			data: {
 				"id": id
 			},
@@ -222,7 +222,7 @@
 		var id = $(this).attr('data');
 		$.ajax({
 			type: "GET",
-			url: "<?= base_url(); ?>controller/detail_product",
+			url: "<?=base_url();?>controller/detail_product",
 			data: {
 				"id": id
 			},
@@ -252,7 +252,7 @@
 		var id = $(this).attr('data');
 		$.ajax({
 			type: "GET",
-			url: "<?= base_url(); ?>controller/barang_keranjang",
+			url: "<?=base_url();?>controller/barang_keranjang",
 			data: {
 				"id": id
 			},

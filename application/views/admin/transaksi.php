@@ -33,30 +33,30 @@
 								class="btn btn-warning btn-sm"><i class="fa fa-print"></i> Cetak Laporan Perbulan</a> -->
 
 						</p>
-						<?php if ($this->session->userdata('error')):?>
+						<?php if ($this->session->userdata('error')): ?>
 						<div id="message_error" class="alert alert-danger alert-dismissible">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 								<h4><i class="icon fa fa-ban"></i> Maaf !</h4>
-								<?php echo $this->session->userdata('error');?>
+								<?php echo $this->session->userdata('error'); ?>
 							</div>
-							<?php elseif ($this->session->userdata('success')):?>
+							<?php elseif ($this->session->userdata('success')): ?>
 							<div id="message_success" class="alert alert-success alert-dismissible">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 								<h4><i class="icon fa fa-check"></i> Success !</h4>
-								<?php echo $this->session->userdata('success');?>
+								<?php echo $this->session->userdata('success'); ?>
 							</div>
 							<?php endif;?>
-							<a href="<?=base_url();?>admin/cetak_transaksi/semua" target="_blank"
+							<a href="<?=base_url();?>report/cetak_transaksi/semua" target="_blank"
 									class="btn btn-primary btn-sm "><i class="fa fa-print"></i> Cetak Semua Transaksi</a>
 						<a href="#"
 									class="btn btn-primary btn-sm semua-transaksi"><i class="fa fa-print"></i> Cetak Transaksi Pertahun</a>
-									
+
 									<a href="#"
 									class="btn btn-primary btn-sm transaksi-perbulan"><i class="fa fa-print"></i> Cetak Transaksi Per Bulan</a>
 						<table id="example1" class="table table-bordered table-striped wrap example1">
-					
+
 							<thead>
-							
+
 								<tr>
 									<th style="width:20px">NO</th>
 									<th style="width:20px">Nomor Transaksi</th>
@@ -69,43 +69,43 @@
 							</thead>
 							<tbody>
 								<?php
-		$no=1;
-		foreach ($transaksi as $field2) :
-		?>
+$no = 1;
+foreach ($transaksi as $field2):
+?>
 								<tr>
 									<td><?=$no++?></td>
 									<td><?=$field2['nomor_transaksi']?></td>
 									<td><?=$field2['nama']?></td>
 									<td><?=$field2['tgl_transaksi']?></td>
 									<td><?=$field2['no_hp']?></td>
-									<td><?php if ($field2['status']=='B'):?>
+									<td><?php if ($field2['status'] == 'B'): ?>
 										<span class="label label-warning">Menunggu Pembayaran</span>
-										<?php elseif ($field2['status']=='K'):?>
+										<?php elseif ($field2['status'] == 'K'): ?>
 										<span class="label label-danger">Konfirmasi Pembayaran</span>
-										<?php elseif ($field2['status']=='L'):?>
+										<?php elseif ($field2['status'] == 'L'): ?>
 										<span class="label label-success"> Lunas</span>
-										<?php elseif ($field2['status']=='P'):?>
+										<?php elseif ($field2['status'] == 'P'): ?>
 										<span class="label label-success"> Proses Pengerjaan</span><br>
 									<label for="">	Selesai Tanggal : <?=$field2['tgl_selesai']?></label>
-									<?php elseif ($field2['status']=='F'):?>
+									<?php elseif ($field2['status'] == 'F'): ?>
 										<span class="label label-success"> Finish</span><br>
-										<?php endif; ?>
+										<?php endif;?>
 								</td>
 									<td>
 										<a href="#" class="btn btn-info btn-sm detail-transaksi" data="<?=$field2['nomor_transaksi']?>" ><i class="fa fa-search"></i> </a>
-										<?php if ($field2['status']=='K'):?>
+										<?php if ($field2['status'] == 'K'): ?>
 											<a href="#" class="btn btn-success btn-sm konfirmasi-pembayaran" data="<?=base_url();?>admin/pembayaran/terima/<?=$field2['nomor_transaksi']?>" ><i class="fa fa-check"></i> Konfirmasi </a>
 											<a href="#" class="btn btn-danger btn-sm tolak-pembayaran" data="<?=base_url();?>admin/pembayaran/tolak/<?=$field2['nomor_transaksi']?>" ><i class="fa fa-times"></i> Tolak </a>
 											<a href="#" class="btn btn-warning btn-sm bukti-bayar" data="<?=$field2['nomor_transaksi']?>" ><i class="fa fa-money"></i>  </a>
-											<?php elseif ($field2['status']=='L'):?>
+											<?php elseif ($field2['status'] == 'L'): ?>
 											<a href="#" class="btn btn-warning btn-sm bukti-bayar" data="<?=$field2['nomor_transaksi']?>" ><i class="fa fa-money"></i>  </a>
-											<a href="#" class="btn btn-success btn-sm proses-transaksi" data="<?=base_url();?>admin/proses/<?=$field2['nomor_transaksi']?>" ><i class="fa fa-refresh"></i> Proses </a> 
-											<?php elseif ($field2['status']=='P'):?>
+											<a href="#" class="btn btn-success btn-sm proses-transaksi" data="<?=base_url();?>admin/proses/<?=$field2['nomor_transaksi']?>" ><i class="fa fa-refresh"></i> Proses </a>
+											<?php elseif ($field2['status'] == 'P'): ?>
 											<a href="#" class="btn btn-warning btn-sm bukti-bayar" data="<?=$field2['nomor_transaksi']?>" ><i class="fa fa-money"></i>  </a>
 											<a href="#" class="btn btn-success btn-sm finish-transaksi" data="<?=base_url();?>admin/finish/<?=$field2['nomor_transaksi']?>" ><i class="fa fa-flag"></i>  Finish Transaksi</a>
-											<?php elseif ($field2['status']=='F'):?>
+											<?php elseif ($field2['status'] == 'F'): ?>
 											<a href="#" class="btn btn-warning btn-sm bukti-bayar" data="<?=$field2['nomor_transaksi']?>" ><i class="fa fa-money"></i>  </a>
-											<?php endif; ?>
+											<?php endif;?>
 
 									</td>
 								</tr>
@@ -162,7 +162,7 @@
 								<label for="">Tgl Selesai</label>
 								<input type="text" readonly name="" id="tgl_selesai" class="form-control" placeholder="" aria-describedby="helpId">
 							  </div>
-							
+
 				</div>
 				<div class="col-md-12">
 					Detail Barang Yang di Pesan
@@ -174,11 +174,11 @@
 							<th>Total Harga</th>
 						</thead>
 						<tbody class="banyak_barang">
-							
+
 						</tbody>
 						<tfoot>
 							<th>
-								
+
 							Terbilang
 							</th>
 							<th id="terbilang" colspan="6" class="text-right">
@@ -200,7 +200,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 			</div>
-		
+
 		</div>
 	</div>
 </div>
@@ -336,7 +336,7 @@
 <!-- Modal -->
 <div class="modal fade" id="semua_transaksi" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 	<div class="modal-dialog modal-sm" role="document">
-		<form action="<?=base_url();?>admin/cetak_transaksi/pertahun" target="_blank" method="post">
+		<form action="<?=base_url();?>report/cetak_transaksi/pertahun" target="_blank" method="post">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Semua Transaksi</h5>
@@ -349,9 +349,9 @@
 				  <label for=""></label>
 				  <select name="tahun" id="tahun" class="form-control">
 					  <option value="">Pilih Tahun Laporan</option>
-					  <?php for ($i=2017; $i < 2030 ; $i++):?>
+					  <?php for ($i = 2017; $i < 2030; $i++): ?>
 					  <option value="<?=$i?>"><?=$i?></option>
-					  <?php endfor; ?>
+					  <?php endfor;?>
 				  </select>
 				  <small id="helpId" class="text-muted">Pilih Tahun laporan</small>
 				</div>
@@ -370,7 +370,7 @@
 <div class="modal fade" id="transaksi_perbulan" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-		<form action="<?=base_url();?>admin/cetak_transaksi/bulan" method="post" target="_blank">
+		<form action="<?=base_url();?>report/cetak_transaksi/bulan" method="post" target="_blank">
 			<div class="modal-header">
 				<h5 class="modal-title">Laporan Perbulan</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -402,15 +402,15 @@
 			<div class="form-group">
 				<label for="">Tahun</label>
 				<select name="tahun" id="tahun" class="form-control">
-					<?php for ($i=2017; $i < 2030 ; $i++):?>
+					<?php for ($i = 2017; $i < 2030; $i++): ?>
 					<option value="<?=$i?>"><?=$i?></option>
-					<?php endfor; ?>
+					<?php endfor;?>
 				</select>
 				<small id="helpId" class="text-muted">Pilih Tahun laporan</small>
 			  </div>
-		</div>	
+		</div>
 			</div>
-			
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 				<button type="submit" class="btn btn-primary">Prose</button>

@@ -21,27 +21,23 @@
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
+						<?php foreach ($foto as $key => $value): ?>
 						<div class="single-prd-item">
-							<img class="img-fluid" src="<?=base_url($barang['foto']);?>" alt="">
+							<img class="img-fluid" src="<?=base_url($value->foto_produk);?>" alt="">
 						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="<?=base_url($barang['foto']);?>" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="<?=base_url($barang['foto']);?>" alt="">
-						</div>
+						<?php endforeach;?>
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
-                    <form action="<?=base_url();?>controller/tambah_keranjang/<?=$barang['id_barang']?>" method="post">
+                    <form action="<?=base_url();?>controller/tambah_keranjang/<?=$barang->id_produk?>" method="post">
 					<div class="s_product_text">
-						<h3><?=$barang['nama']?></h3>
-						<h2>Rp. <?=number_format($barang['harga'])?></h2>
+						<h3><?=$barang->nama_produk?></h3>
+						<h2>Rp. <?=number_format($barang->harga_jual)?></h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Jenis</span> : <?=$barang['jenis']?></a></li>
+							<li><a class="active" href="#"><span>Jenis</span> : <?=$barang->jenis?></a></li>
 							<li><a href="#"><span>Status</span> : Ready Stock</a></li>
 						</ul>
-						<p><?=$barang['detail']?></p>
+						<p><?=$barang->keterangan?></p>
 						<div class="product_count">
 							<label for="qty">Quantity:</label>
 							<input type="text" name="jumlah_pesan" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
@@ -51,12 +47,12 @@
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
-                            <?php if ($this->session->userdata('logged_in')==true):?>
-                                
+                            <?php if ($this->session->userdata('logged_in') == true): ?>
+
                             <button class="primary-btn "  type="submit" >Add to Cart</button>
-                            <?php else:?>
+                            <?php else: ?>
                             <button class="primary-btn tidak-bisa-akses"   >Add to Cart</button>
-                            <?php endif; ?>
+                            <?php endif;?>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
                         </div>
@@ -68,5 +64,4 @@
 	</div>
 	<!--================End Single Product Area =================-->
 
-	
-	
+

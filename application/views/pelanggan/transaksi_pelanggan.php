@@ -35,23 +35,23 @@
 						</p>
 						<!-- <a href="<?=base_url();?>admin/cetak_user" target="_blank"
 									class="btn btn-primary "><i class="fa fa-print"></i> Cetak Data</a> -->
-									<?php if ($this->session->userdata('error')):?>
+									<?php if ($this->session->userdata('error')): ?>
               <div id="message_error" class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h4><i class="icon fa fa-ban"></i> Maaf !</h4>
-                  <?php echo $this->session->userdata('error');?>
+                  <?php echo $this->session->userdata('error'); ?>
               </div>
-              <?php elseif ($this->session->userdata('success')):?>
+              <?php elseif ($this->session->userdata('success')): ?>
               <div id="message_success" class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h4><i class="icon fa fa-check"></i> Success !</h4>
-                  <?php echo $this->session->userdata('success');?>
+                  <?php echo $this->session->userdata('success'); ?>
               </div>
               <?php endif;?>
 						<table id="example1" class="table table-bordered table-striped wrap example1">
-					
+
 							<thead>
-							
+
 								<tr>
 									<th style="width:20px">NO</th>
 									<th style="width:20px" class="text-center">Nomor Transaksi</th>
@@ -65,35 +65,35 @@
 							</thead>
 							<tbody>
 								<?php
-		$no=1;
-		foreach ($transaksi as $field2) :
-		?>
+$no = 1;
+foreach ($transaksi as $field2):
+?>
 								<tr>
 									<td><?=$no++?></td>
 									<td><?=$field2['nomor_transaksi']?></td>
 									<td><a href="#" data="<?=$field2['nomor_transaksi']?>" class="btn btn-info btn-xs detail-pesanan"><i class="fa fa-search"></i>Detail Pesanan</a></td>
 									<td><?=$field2['tgl_transaksi']?></td>
 									<td><?=$field2['tgl_selesai']?></td>
-									<td>Rp. <?=$field2['total_tagihan']+$field2['ongkir']?></td>
+									<td>Rp. <?=$field2['total_tagihan'] + $field2['ongkir']?></td>
 									<td>
-									<?php if ($field2['status']=='B'):?>
+									<?php if ($field2['status'] == 'B'): ?>
 										<span class="label label-warning">Menunggu Pembayaran</span>
-										<?php elseif ($field2['status']=='K'):?>
+										<?php elseif ($field2['status'] == 'K'): ?>
 										<span class="label label-danger">Konfirmasi Pembayaran</span>
-										<?php elseif ($field2['status']=='L'):?>
+										<?php elseif ($field2['status'] == 'L'): ?>
 										<span class="label label-success"> Lunas</span>
-										<?php elseif ($field2['status']=='P'):?>
+										<?php elseif ($field2['status'] == 'P'): ?>
 										<span class="label label-success"> Proses Pengerjaan</span><br>
 									<label for="">	Selesai Tanggal : <?=$field2['tgl_selesai']?></label>
-									<?php elseif ($field2['status']=='F'):?>
+									<?php elseif ($field2['status'] == 'F'): ?>
 										<span class="label label-success"> Finish</span><br>
-										<?php endif; ?>
+										<?php endif;?>
 									</td>
 									<td>
-									<?php if ($field2['status']=='B'):?>
+									<?php if ($field2['status'] == 'B'): ?>
 										<a href="#" class="btn btn-success btn-xs upload-bukti" data="<?=$field2['nomor_transaksi']?>"><i class="fa fa-upload"></i> Upload Bukti Bayar</a>
-										
-									<?php endif; ?>
+
+									<?php endif;?>
 									</td>
 								</tr>
 								<?php endforeach;?>
@@ -124,9 +124,34 @@
 
 			</div>
 			<div class="modal-body">
-				<div class="" id="isi-user">
+			<table class="table table-bordered">
+						<thead>
+							<th>Nama Barang</th>
+							<th>Harga Satuan</th>
+							<th>Jumlah Pesan</th>
+							<th>Total Harga</th>
+						</thead>
+						<tbody class="banyak_barang">
 
-				</div>
+						</tbody>
+						<tfoot>
+							<th>
+
+							Terbilang
+							</th>
+							<th id="terbilang" colspan="6" class="text-right">
+								Tiga Puluh Juta Rupiah
+							</th>
+						</tfoot>
+						<tfoot>
+							<th>
+								Total Belanja
+							</th>
+							<th id="total_bayar" colspan="6" class="text-right">
+									Rp. 30.000.000
+							</th>
+						</tfoot>
+					</table>
 
 			</div>
 			<div class="modal-footer">

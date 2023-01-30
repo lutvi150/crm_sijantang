@@ -23,22 +23,22 @@
 					<!-- <a href="" target="_blank" class="btn btn-warning "><i class="fa fa-print"></i> Cetak PDF</a> -->
 
 					<div class="box-body">
-						<?php if ($this->session->userdata('error')):?>
+						<?php if ($this->session->userdata('error')): ?>
 						<div id="message_error" class="alert alert-danger alert-dismissible">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<h4><i class="icon fa fa-ban"></i> Maaf !</h4>
-							<?php echo $this->session->userdata('error');?>
+							<?php echo $this->session->userdata('error'); ?>
 						</div>
-						<?php elseif ($this->session->userdata('success')):?>
+						<?php elseif ($this->session->userdata('success')): ?>
 						<div id="message_success" class="alert alert-success alert-dismissible">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<h4><i class="icon fa fa-check"></i> Success !</h4>
-							<?php echo $this->session->userdata('success');?>
+							<?php echo $this->session->userdata('success'); ?>
 						</div>
 						<?php endif;?>
 						<a href="<?=base_url();?>admin/tambah_produk" class="btn btn-success btn-sm "><i
 								class="fa fa-plus"></i> Tambah Produk</a>
-						<a href="<?=base_url();?>admin/cetak_barang/semua" target="_blank"
+						<a href="<?=base_url();?>report/cetak_produk" target="_blank"
 							class="btn btn-danger btn-sm "><i class="fa fa-print"></i> Cetak Data</a>
 
 						<table id="example1" class="table table-bordered table-striped example1 wrap">
@@ -51,24 +51,25 @@
 									<th>Harga Modal</th>
 									<th>Margin Keuntungan</th>
 									<th>Stock</th>
-									<th>Foto(Klik untuk lihat foto)</th>
 									<th class="wrap">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
-		$no=1;
-		foreach ($barang as $field1) :
-		?>
+$no = 1;
+foreach ($barang as $field1):
+?>
 								<tr>
 									<td><?php echo $no++; ?></td>
-									<td><?php echo $field1-> nama_produk;?> </td>
-									<td><?php echo $field1-> jenis;?> </td>
-									<td><?=number_format($field1-> harga_jual);?></td>
+									<td><?php echo $field1->nama_produk; ?> </td>
+									<td><?php echo $field1->jenis; ?> </td>
+									<td><?=number_format($field1->harga_jual);?></td>
 									<td><?=number_format($field1->harga_modal)?></td>
-									<td><?php $keuntungan=$field1->harga_jual-$field1->harga_modal;$persentase=round((($keuntungan/$field1->harga_modal)*100),2); echo number_format($keuntungan).'/ '.$persentase."% dari modal"; ?></td>
-									<td><?=$field1->stock." ". $field1->satuan?></td>
-									<td><button class="btn btn-info" type="button">Foto</button></td>
+									<td><?php $keuntungan = $field1->harga_jual - $field1->harga_modal;
+$persentase = round((($keuntungan / $field1->harga_modal) * 100), 2);
+echo number_format($keuntungan) . '/ ' . $persentase . "% dari modal";?></td>
+									<td><?=$field1->stock . " " . $field1->satuan?></td>
+
 									<td class="wrap">
 										<a href="#" class="btn btn-primary btn-xs detail-produk"
 											data="<?=$field1->id_produk;?>"><i class="fa fa-edit"></i> Detail</a>

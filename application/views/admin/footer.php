@@ -17,40 +17,40 @@
 
 <!-- jQuery 3 -->
 <!-- jQuery UI 1.11.4 -->
-<script src="<?php echo base_url();?>assets/jquery-ui/jquery-ui.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- Bootstrap 3.3.7 -->
 
-<script src="<?php echo base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/chart.js/Chart.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/chart.js/Chart.js"></script>
 <!-- FastClick -->
-<script src="<?php echo base_url();?>assets/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo base_url(); ?>assets/fastclick/lib/fastclick.js"></script>
 <!-- Sparkline -->
 
-<script src="<?php echo base_url();?>assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="<?php echo base_url();?>assets/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-knob/dist/jquery.knob.min.js"></script>
 
 <!-- daterangepicker -->
-<script src="<?php echo base_url();?>assets/moment/min/moment.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/moment/min/moment.min.js"></script>
 
-<script src="<?php echo base_url();?>assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="<?php echo base_url();?>assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Slimscroll -->
-<script src="<?php echo base_url();?>assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- AdminLTE App -->
-<script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url();?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 	$('#tanggal_perhari').datepicker();
 	$('#datepicker3').datepicker({
 		format: "dd-mm-yyyy"
 	});
 	// sudah ada desain
-	$('.sudah-ada').click(function (e) { 
+	$('.sudah-ada').click(function (e) {
 		let id=$(this).attr('data');
 		$.ajax({
 			type: "GET",
@@ -64,7 +64,7 @@
 		});
 	});
 	// belum ada desain
-	$('.belum-ada').click(function (e) { 
+	$('.belum-ada').click(function (e) {
 		$('#belum_ada').modal('show');
 	});
 	// hitung otomatis
@@ -97,7 +97,7 @@
 			dataType: "JSON",
 			success: function (response) {
 				console.log(response);
-				
+
 				$('#id_uniq_request').val(id);
 				$('#total_pesanan').val(response.uniq_request.jumlah_belanja);
 				$('#tetapkan_harga').modal('show');
@@ -195,15 +195,13 @@
 				var html = "";
 				response.jenis_barang.forEach(element => {
 					html += `<tr>
-								<td>` + element.nama + `</td>
-								<td>` + element.harga + `</td>
+								<td>` + element.nama_produk + `</td>
+								<td>` + element.harga_jual + `</td>
 								<td>` + element.jumlah_pesan + `</td>
 								<td>` + element.total_harga + `</td>
 							</tr>`
 				});
 				$('.banyak_barang').html(html);
-
-				console.log(response);
 				$('#tgl_selesai').val(response.data_transaksi.tgl_selesai);
 				$('#tgl_pesanan').val(response.data_transaksi.tgl_transaksi);
 				$('#total_bayar').text('Rp. ' + response.data_transaksi.total_tagihan);
@@ -224,7 +222,7 @@
 	$('.konfirmasi').click(function (e) {
 		var id = $(this).attr('data');
 
-		$('#id_barang').val(id);
+		$('#id_produk').val(id);
 		$('#konfirmasi').modal('show');
 	});
 	$('.detail-produk').click(function (e) {
@@ -238,7 +236,7 @@
 			dataType: "JSON",
 			success: function (response) {
 				console.log(response);
-				$('#text_detail_produk').text(response.detail);
+				$('#text_detail_produk').text(response.keterangan);
 				$('#detail_produk').modal('show');
 			}
 		});
