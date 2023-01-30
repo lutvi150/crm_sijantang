@@ -7,11 +7,11 @@
 				<img src="<?=base_url();?>assets/img/icon-admin.png" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<?php if($this->session->userdata('level')=='pelanggan'): ?>
+				<?php if ($this->session->userdata('level') == 'pelanggan'): ?>
 				<p><?=$nama?> </p>
-				<?php else : ?>
+				<?php else: ?>
 				<p>Admin</p>
-				<?php endif; ?>
+				<?php endif;?>
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
@@ -30,42 +30,42 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MAIN NAVIGATION</li>
-			<?php if($this->session->userdata('level')=='admin'): ?>
+			<?php if ($this->session->userdata('level') == 'admin'): ?>
 			<!-- use this for admin menu -->
 			<li class="">
-				<a href="<?php echo base_url();?>admin">
+				<a href="<?php echo base_url(); ?>admin">
 					<i class="fa fa-home"></i><span>Home</span>
 				</a>
 			</li>
 			<li class="">
-				<a href="<?php echo base_url();?>Controller">
+				<a href="<?php echo base_url(); ?>Controller">
 					<i class="fa fa-home"></i><span>Katalog Produk</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>admin/barang">
+				<a href="<?php echo base_url(); ?>admin/barang">
 					<i class="fa fa-briefcase"></i> <span>Produk</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>admin/data_transaksi">
+				<a href="<?php echo base_url(); ?>admin/data_transaksi">
 					<i class="fa fa-money"></i> <span>Data Transaksi</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>admin/data_user">
+				<a href="<?php echo base_url(); ?>admin/data_user">
 					<i class="fa fa-users"></i> <span>Data User</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>admin/chat">
+				<a href="<?php echo base_url(); ?>admin/data_user">
 					<i class="fa fa-book"></i> <span>Chat</span>
 				</a>
 			</li>
-			<?php elseif($this->session->userdata('level')=='pelanggan'): ?>
+			<?php elseif ($this->session->userdata('level') == 'pelanggan'): ?>
 			<!-- use this for use menu -->
 			<li class="">
-				<a href="<?php echo base_url();?>pelanggan/menu_anda">
+				<a href="<?php echo base_url(); ?>pelanggan/menu_anda">
 					<i class="fa fa-home"></i><span>Home</span>
 				</a>
 			</li>
@@ -74,16 +74,16 @@
 			</li>
 
 			<li>
-				<a href="<?php echo base_url();?>pelanggan/data_transaksi">
+				<a href="<?php echo base_url(); ?>pelanggan/data_transaksi">
 					<i class="fa fa-money"></i> <span>Menu Transaksi</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>pelanggan/chat">
+				<a href="<?php echo base_url(); ?>pelanggan/data_transaksi">
 					<i class="fa fa-money"></i> <span>Chat Admin</span>
 				</a>
 			</li>
-			<?php endif; ?>
+			<?php endif;?>
 		</ul>
 	</section>
 	<!-- /.sidebar -->

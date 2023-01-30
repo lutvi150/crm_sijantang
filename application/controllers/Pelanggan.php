@@ -230,4 +230,9 @@ class Pelanggan extends CI_Controller
             return 'upload/original_image/' . $result[$nama]['file_name'];
         }
     }
+    // chat
+    public function chat(Type $var = null)
+    {
+        $this->menu('pelanggan/chat', '');
+    }
 }

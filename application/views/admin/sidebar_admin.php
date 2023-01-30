@@ -26,30 +26,30 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="">
-          <a href="<?php echo base_url();?>admin">
+          <a href="<?php echo base_url(); ?>admin">
             <i class="fa fa-home"></i><span>Home</span>
-           
+
           </a>
-        
+
         </li>
         <li>
-          <a href="<?php echo base_url();?>admin/barang">
+          <a href="<?php echo base_url(); ?>admin/barang">
             <i class="fa fa-briefcase"></i> <span>Barang</span>
-          
+
           </a>
         </li>
         <li>
           <a href="<?=base_url();?>admin/uniq_request"><i class="fa fa-hourglass"></i> Uniq Request</a>
         </li>
         <li>
-          <a href="<?php echo base_url();?>admin/data_transaksi">
+          <a href="<?php echo base_url(); ?>admin/data_transaksi">
             <i class="fa fa-money"></i> <span>Data Transaksi</span>
           </a>
         </li>
         <li>
-          <a href="<?php echo base_url();?>admin/data_user">
+          <a href="<?php echo base_url(); ?>admin/data_user">
             <i class="fa fa-users"></i> <span>Data User</span>
-          
+
           </a>
         </li>
       </ul>
@@ -57,4 +57,3 @@
     <!-- /.sidebar -->
   </aside>
 
- 
