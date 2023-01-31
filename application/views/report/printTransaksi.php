@@ -6,36 +6,34 @@
 		<tr style="background-color: rgb(192, 120, 120);">
 									<td style="width:20px">NO</td>
 									<td style="width:20px">Nomor Transaksi</td>
-									<td style="width:20px">Nama Pelanggan</td>
-									<td style="width: 20px;" >Tanggal Transaksi</td>
-									<td style="width:20px">Nomor HP</td>
-									<td style="width: 20px;">Status</td>
+									<td style="width:20px">Tanggal Transaksi</td>
+									<td style="width:20px;" >Nama Pembeli</td>
+									<td style="width:20px">Alamat</td>
+									<td style="width:20px">No. Kontak</td>
+									<td style="width:20px">Jumlah</td>
 								</tr><tbody>
 								<?php
 $no = 1;
+$jumlah =[];
 foreach ($transaksi as $field2):
 ?>
+<?php $jumlah[]=$field2['total_tagihan']; ?>
 								<tr>
-									<td><?=$no++?></td>
+									<td><?= $no++?></td>
 									<td><?=$field2['nomor_transaksi']?></td>
-									<td><?=$field2['nama']?></td>
 									<td><?=$field2['tgl_transaksi']?></td>
+									<td><?=$field2['nama']?></td>
+									<td><?=$field2['alamat']?></td>
 									<td><?=$field2['no_hp']?></td>
-									<td><?php if ($field2['status'] == 'B'): ?>
-										<span class="label label-warning">Menunggu Pembayaran</span>
-										<?php elseif ($field2['status'] == 'K'): ?>
-										<span class="label label-danger">Konfirmasi Pembayaran</span>
-										<?php elseif ($field2['status'] == 'L'): ?>
-										<span class="label label-success"> Lunas</span>
-										<?php elseif ($field2['status'] == 'P'): ?>
-										<span class="label label-success"> Proses Pengerjaan</span><br>
-									<label for="">	Selesai Tanggal : <?=$field2['tgl_selesai']?></label>
-									<?php elseif ($field2['status'] == 'F'): ?>
-										<span class="label label-success"> Finish</span><br>
-										<?php endif;?>
+									<td>Rp. <?=number_format($field2['total_tagihan'])?>
 								</td>
 								</tr>
 								<?php endforeach;?>
+								<?php $count=array_sum($jumlah)?>
+								<tr>
+									<td colspan="6" >Jumlah</td>
+									<td>Rp. <?=number_format($count)?></td>
+								</tr>
 							</tbody>
 	</table>
 </body>

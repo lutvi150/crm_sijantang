@@ -198,14 +198,6 @@
 										</a>
 
 									<?php endif;?>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="#" data="<?=$value['id_produk']?>" class="social-info detail-product">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -262,14 +254,6 @@
 										</a>
 
 									<?php endif;?>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="#" data="<?=$value['id_produk']?>" class="social-info detail-product">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
 								</div>
 							</div>
 						</div>
