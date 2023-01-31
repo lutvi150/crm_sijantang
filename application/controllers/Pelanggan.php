@@ -233,6 +233,8 @@ class Pelanggan extends CI_Controller
     // chat
     public function chat(Type $var = null)
     {
+        redirect('pelanggan/data_transaksi');
+        exit;
         $this->menu('pelanggan/chat', '');
     }
 }
