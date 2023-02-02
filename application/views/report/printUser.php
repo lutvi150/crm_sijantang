@@ -10,7 +10,6 @@
 									<td>Alamat</td>
 									<td style="width: 20px;" >Tanggal Registrasi</td>
 									<td style="width:20px">Nomor HP</td>
-									<td style="width: 20px">Foto</td>
 								</tr><tbody><?php
 $no = 1;
 foreach ($data_user as $field2):
@@ -22,7 +21,6 @@ foreach ($data_user as $field2):
 									<td><?=$field2['alamat']?></td>
 									<td><?=$field2['tgl_registrasi']?></td>
 									<td><?=$field2['no_hp']?></td>
-									<td><?php base_url($field2['foto'])?></td>
 								</tr>
 								<?php endforeach;?>
 							</tbody>
