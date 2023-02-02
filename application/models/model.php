@@ -1,5 +1,5 @@
 <?php
-class model extends CI_Model
+class Model extends CI_Model
 {
     // perintah untuk membuat nomor otomatis
     public function nomor_otomatis()
@@ -174,6 +174,12 @@ class model extends CI_Model
         $this->db->where('status', $jenis);
         $this->db->where('id_user', $id);
         return $this->db->get();
+    }
+    public function chart_transaksi($tahun)
+    {
+        $this->db->from('tb_transaksi');
+        $this->db->where('SUBSTRING(tb_transaksi.tgl_transaksi,4,7)', $tahun);
+        return $this->db->count_all_results();
     }
 
 }

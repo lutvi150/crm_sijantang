@@ -127,7 +127,7 @@
  					<div class="box-body">
  						<div class="col-md-12 text-center">
  							<div class="chart">
- 								<canvas id="diagram" style="height:250px"></canvas>
+								<canvas id="myChart"></canvas>
  							</div>
 
  						</div>
@@ -146,3 +146,43 @@
 
  		</div>
  </div>
+ 
+<script src="<?=base_url();?>assets/chart.js/Chart.bundle.min.js"></script>
+ <script>
+	let baseUrl="<?=base_url();?>";
+	$(document).ready(function () {
+		getData();
+	});
+	function getData() { 
+		$.ajax({
+			type: "GET",
+			url: baseUrl+"/admin/get_chart",
+			dataType: "JSON",
+			success: function (response) {
+				makeChart(response)
+			}
+		});
+	 }
+	function makeChart(response) { 
+		const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+	labels: response.bulan,
+	datasets: [{
+	  label: 'Data Transaksi',
+	  data: response.data,
+	  borderWidth: 1
+	}]
+  },
+  options: {
+	scales: {
+	  y: {
+		beginAtZero: true
+	  }
+	}
+  }
+});
+	 }
+  </script>

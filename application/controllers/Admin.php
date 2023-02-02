@@ -5,7 +5,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('pdf');
+        // $this->load->library('pdf');
         $this->load->model('ModelProduk', 'produk');
         $this->load->model('ModelChat', 'chat');
         $this->load->library('form_validation');
@@ -876,6 +876,21 @@ class Admin extends CI_Controller
         $id = $this->input->post('id_user');
         $chat = $this->chat->get_chat($id);
         echo json_encode($chat);
+    }
+    // use for grafik
+    public function get_chart(Type $var = null)
+    {
+        $tahun = date('Y');
+        for ($i = 1; $i <= 12; $i++) {
+            if ($i < 10) {
+                $bulan = '0' . $i . '-' . $tahun;
+            } else {
+                $bulan = $i . '-' . $tahun;
+            }
+            $data['bulan'][] = $bulan;
+            $data['data'][] = $this->model->chart_transaksi($bulan);
+        }
+        echo json_encode($data);
     }
 
 }

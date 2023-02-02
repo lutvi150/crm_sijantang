@@ -22,7 +22,6 @@
 <!-- Bootstrap 3.3.7 -->
 
 <script src="<?php echo base_url(); ?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/chart.js/Chart.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>assets/fastclick/lib/fastclick.js"></script>
 <!-- Sparkline -->
@@ -280,35 +279,7 @@
 	// tampila diagram
 
 </script>
-<!-- <script>
-	var randomScalingFactor = function () {
-		return Math.round(Math.random() * 100)
-	};
-	var lineChartData = {
-		labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agus", "September", "Oktober",
-			"November", "Desember"
-		],
-		datasets: [{
-			label: "My Second dataset",
-			fillColor: "rgba(151,187,205,0.2)",
-			strokeColor: "rgba(151,187,205,1)",
-			pointColor: "rgba(151,187,205,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(151,187,205,1)",
-			data: [12, 13, 14, 14, 16, 17, 18, 2, 10, 12, 13, 15]
-		}]
 
-	}
-
-	window.onload = function () {
-		var ctx = document.getElementById("diagram").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		});
-	}
-
-</script> -->
 </body>
 
 </html>
