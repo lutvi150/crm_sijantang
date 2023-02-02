@@ -304,6 +304,7 @@ class Admin extends CI_Controller
                     'harga_jual' => $this->input->post('harga_jual'),
                     'harga_modal' => $this->input->post('harga_modal'),
                     'keterangan' => $this->input->post('keterangan'),
+                    'stock' => $this->input->post('stock'),
 
                 ];
                 $this->model->update_data('tb_produk', 'id_produk', $id_produk, $data);
