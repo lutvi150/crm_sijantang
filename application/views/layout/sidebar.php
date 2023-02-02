@@ -58,7 +58,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url(); ?>admin/data_user">
+				<a href="<?php echo base_url(); ?>admin/get_new_chat">
 					<i class="fa fa-book"></i> <span>Chat</span>
 				</a>
 			</li>
@@ -79,7 +79,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url(); ?>pelanggan/data_transaksi">
+				<a href="<?php echo base_url(); ?>pelanggan/chat">
 					<i class="fa fa-money"></i> <span>Chat Admin</span>
 				</a>
 			</li>

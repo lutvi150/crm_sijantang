@@ -7,6 +7,7 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->library('pdf');
         $this->load->model('ModelProduk', 'produk');
+        $this->load->model('ModelChat', 'chat');
         $this->load->library('form_validation');
 
         date_default_timezone_set('Asia/Jakarta');
@@ -821,6 +822,60 @@ class Admin extends CI_Controller
         curl_close($curlHandle);
         header('Content-Type: application/json');
         echo $responjson;
+    }
+    // use for make chat
+    public function get_new_chat(Type $var = null)
+    {
+        $chat = $this->chat->get_new_chat();
+        $searchat = [];
+        $data_chat = [];
+        if ($chat !== null) {
+            foreach ($chat as $key => $value) {
+                $searchat[] = $value->id_user;
+            };
+            $data_chat = $this->chat->get_data_user($searchat);
+            foreach ($data_chat as $key => $value) {
+                $chat_new[] = (object) [
+                    'id_user' => $value->id_user,
+                    'nama' => $value->nama,
+                    'alamat' => $value->alamat,
+                    'no_hp' => $value->no_hp,
+                    'foto' => $value->foto,
+                    'jumlah_pesan' => $this->chat->count_message($value->id_user),
+                ];
+            }
+        }
+        $data['data_user'] = $chat_new;
+        $this->menu('admin/chat', $data);
+    }
+    public function chat($id_user)
+    {
+        $data['id_user'] = $id_user;
+        $this->chat->update_status_chat($id_user);
+        $this->menu('admin/detail_chat', $data);
+    }
+    // store chat
+    public function store_chat(Type $var = null)
+    {
+        $chat = $this->input->post('chat');
+        $insert = [
+            'id_user' => $this->input->post('id_user'),
+            'sumber' => 'admin',
+            'tanggal_chat' => date('d M Y H:i:s'),
+            'chat' => $chat,
+            'status_baca' => 1,
+        ];
+        $response = [
+            'status' => 'success',
+        ];
+        $this->chat->insert_chat($insert);
+        echo json_encode($response);
+    }
+    public function get_chat(Type $var = null)
+    {
+        $id = $this->input->post('id_user');
+        $chat = $this->chat->get_chat($id);
+        echo json_encode($chat);
     }
 
 }

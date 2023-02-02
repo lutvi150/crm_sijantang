@@ -24,33 +24,7 @@
 
 					<div class="box-body">
 
-						<!-- <p class="text-muted font-13 m-b-30">
-							<a href="" data-toggle="modal" class="btn btn-primary btn-sm"><i class="fa fa-print"></i>
-								Cetak Keseluruhan</a>
-							<a href="#" class="btn btn-danger btn-sm " data-target="cetak-per-tahun"><i class="fa fa-print"></i> Cetak
-								Laporan Pertahun</a>
-							<a href="#" data-toggle="modal" data-target="#modal_per_bulan"
-								class="btn btn-warning btn-sm"><i class="fa fa-print"></i> Cetak Laporan Perbulan</a> -->
 
-						</p>
-						<!-- <a href="<?=base_url();?>admin/cetak_user" target="_blank"
-									class="btn btn-primary "><i class="fa fa-print"></i> Cetak Data</a> -->
-						<?php if ($this->session->userdata('error')): ?>
-						<div id="message_error" class="alert alert-danger alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<h4><i class="icon fa fa-ban"></i> Maaf !</h4>
-							<?php echo $this->session->userdata('error'); ?>
-						</div>
-						<?php elseif ($this->session->userdata('success')): ?>
-						<div id="message_success" class="alert alert-success alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<h4><i class="icon fa fa-check"></i> Success !</h4>
-							<?php echo $this->session->userdata('success'); ?>
-						</div>
-						<?php endif;?>
-						<!-- Construct the card with style you want. Here we are using card-danger -->
-						<!-- Then add the class direct-chat and choose the direct-chat-* contexual class -->
-						<!-- The contextual class should match the card, so we are using direct-chat-danger -->
 						<div class="col-md-12">
 							<!-- DIRECT CHAT -->
 							<div class="box box-warning direct-chat direct-chat-warning">
@@ -63,7 +37,7 @@
 								<div class="box-body">
 									<!-- Conversations are loaded here -->
 									<div class="direct-chat-messages">
-										
+
 									</div>
 									<!--/.direct-chat-messages-->
 
@@ -97,21 +71,23 @@
 </div>
 <script>
 	let baseUrl = `<?=base_url();?>`;
+	let id_user='<?=$id_user?>';
 	$(document).ready(function () {
 		get_chat();
 	});
 
 	function get_chat() {
 		$.ajax({
-			type: "GET",
-			url: baseUrl + "/pelanggan/get_chat",
+			type: "POST",
+			url: baseUrl + "/admin/get_chat",
+			data:{id_user:id_user},
 			dataType: "JSON",
 			success: function (response) {
 				let chat=[];
 				$.each(response, function (index, value) {
-					
+
 					if (value.sumber=='admin') {
-						chat+=`<div class="direct-chat-msg">
+						chat+=`<div class="direct-chat-msg right">
 											<div class="direct-chat-info clearfix">
 												<span class="direct-chat-name pull-left">Admin</span>
 												<span class="direct-chat-timestamp pull-right">${value.tanggal_chat}</span>
@@ -125,7 +101,7 @@
 `
 					}else{
 						chat+=`
-										<div class="direct-chat-msg right">
+										<div class="direct-chat-msg">
 											<div class="direct-chat-info clearfix">
 												<span class="direct-chat-name pull-right">${value.nama}</span>
 												<span class="direct-chat-timestamp pull-left">${value.tanggal_chat}</span>
@@ -148,9 +124,10 @@
 	function send_message() {
 		$.ajax({
 			type: "POST",
-			url: baseUrl + "/pelanggan/store_chat",
+			url: baseUrl + "/admin/store_chat",
 			data: {
-				chat: $("input[name=message]").val()
+				chat: $("input[name=message]").val(),
+				id_user:id_user,
 			},
 			dataType: "JSON",
 			success: function (response) {

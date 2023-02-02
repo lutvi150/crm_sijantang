@@ -5,6 +5,8 @@ class Pelanggan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('ModelChat', 'chat');
+
         if ($this->session->userdata('logged_in') !== true) {
             $this->session->set_flashdata('error', 'Maaf hak akses anda di tolak');
             redirect('controller/login');
@@ -233,8 +235,29 @@ class Pelanggan extends CI_Controller
     // chat
     public function chat(Type $var = null)
     {
-        redirect('pelanggan/data_transaksi');
-        exit;
         $this->menu('pelanggan/chat', '');
+    }
+    // store chat
+    public function store_chat(Type $var = null)
+    {
+        $chat = $this->input->post('chat');
+        $insert = [
+            'id_user' => $this->session->userdata('id_user'),
+            'sumber' => 'user',
+            'tanggal_chat' => date('d M Y H:i:s'),
+            'chat' => $chat,
+            'status_baca' => 0,
+        ];
+        $response = [
+            'status' => 'success',
+        ];
+        $this->chat->insert_chat($insert);
+        echo json_encode($response);
+    }
+    public function get_chat(Type $var = null)
+    {
+        $id = $this->session->userdata('id_user');
+        $chat = $this->chat->get_chat($id);
+        echo json_encode($chat);
     }
 }
