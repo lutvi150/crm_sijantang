@@ -36,6 +36,7 @@
 						<ul class="list">
 							<li><a class="active" href="#"><span>Jenis</span> : <?=$barang->jenis?></a></li>
 							<li><a href="#"><span>Status</span> : Ready Stock</a></li>
+							<li><a href="#"><span>Stock</span> : <?=$barang->stock . " " . $barang->satuan?></a></li>
 						</ul>
 						<p><?=$barang->keterangan?></p>
 						<div class="product_count">

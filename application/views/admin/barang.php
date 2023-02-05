@@ -51,6 +51,8 @@
 									<th>Harga Modal</th>
 									<th>Margin Keuntungan</th>
 									<th>Stock</th>
+									<th>Persentase</th>
+									<th>Jumlah Order</th>
 									<th class="wrap">Aksi</th>
 								</tr>
 							</thead>
@@ -65,11 +67,11 @@ foreach ($barang as $field1):
 									<td><?php echo $field1->jenis; ?> </td>
 									<td><?=number_format($field1->harga_jual);?></td>
 									<td><?=number_format($field1->harga_modal)?></td>
-									<td><?php $keuntungan = $field1->harga_jual - $field1->harga_modal;
-$persentase = round((($keuntungan / $field1->harga_modal) * 100), 2);
-echo number_format($keuntungan) . '/ ' . $persentase . "% dari modal";?></td>
+									<td><?php
+echo number_format($field1->keuntungan) . '/ ' . $field1->persentase_keuntungan . "% dari modal"; ?></td>
 									<td><?=$field1->stock . " " . $field1->satuan?></td>
-
+									<td><?=$field1->persentase?>%</td>
+									<td><?=$field1->terjual . " " . $field1->satuan?></td>
 									<td class="wrap">
 										<a href="#" class="btn btn-primary btn-xs detail-produk"
 											data="<?=$field1->id_produk;?>"><i class="fa fa-edit"></i> Detail</a>

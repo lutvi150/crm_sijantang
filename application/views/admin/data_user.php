@@ -61,6 +61,9 @@
 									<th>Alamat</th>
 									<th style="width: 20px;" >Tanggal Registrasi</th>
 									<th style="width:20px">Nomor HP</th>
+									<th style="width:20px">Alamat</th>
+									<th style="width:20px">Jml Order</th>
+									<th style="width:20px">Total Belanja</th>
 									<th style="width: 20px">Foto</th>
 								</tr>
 							</thead>
@@ -71,12 +74,15 @@ foreach ($data_user as $field2):
 ?>
 								<tr>
 									<td><?=$no++?></td>
-									<td><?=$field2['username']?></td>
-									<td><?=$field2['nama']?></td>
-									<td><?=$field2['alamat']?></td>
-									<td><?=$field2['tgl_registrasi']?></td>
-									<td><?=$field2['no_hp']?></td>
-									<td><?php base_url($field2['foto'])?></td>
+									<td><?=$field2->username?></td>
+									<td><?=$field2->nama?></td>
+									<td><?=$field2->alamat?></td>
+									<td><?=$field2->tgl_registrasi?></td>
+									<td><?=$field2->no_hp?></td>
+									<td><?=$field2->alamat?></td>
+									<td><?=$field2->jumlah_order?> Item</td>
+									<td>Rp. <?=number_format($field2->total_belanja)?></td>
+									<td><?php base_url($field2->foto)?></td>
 								</tr>
 								<?php endforeach;?>
 							</tbody>

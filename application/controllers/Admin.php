@@ -8,6 +8,8 @@ class Admin extends CI_Controller
         // $this->load->library('pdf');
         $this->load->model('ModelProduk', 'produk');
         $this->load->model('ModelChat', 'chat');
+        $this->load->model('ModelKeranjang', 'keranjang');
+        $this->load->model('ModelUser', 'user');
         $this->load->library('form_validation');
 
         date_default_timezone_set('Asia/Jakarta');
@@ -54,7 +56,34 @@ class Admin extends CI_Controller
     public function barang()
     {
 
-        $data['barang'] = $this->produk->get_produk();
+        $barang = $this->produk->get_produk();
+        if ($barang) {
+            foreach ($barang as $key => $value) {
+                $terjual = $this->keranjang->get_best_seller($value->id_produk)->jumlah_pesan;
+                $persentase = 0;
+                if ($value->stock > 0 && $terjual > 0) {
+                    $persentase = round(($terjual / $value->stock) * 100, 2);
+                }
+                $keuntungan = $value->harga_jual - $value->harga_modal;
+                $persentase_keuntungan = round(($keuntungan / $value->harga_modal) * 100, 2);
+                $resultBarang[] = (object) [
+                    'nama_produk' => $value->nama_produk,
+                    'jenis' => $value->jenis,
+                    'harga_jual' => $value->harga_jual,
+                    'harga_modal' => $value->harga_modal,
+                    'stock' => $value->stock,
+                    'id_produk' => $value->id_produk,
+                    'terjual' => $terjual,
+                    'persentase' => $persentase,
+                    'keuntungan' => $keuntungan,
+                    'persentase_keuntungan' => $persentase_keuntungan,
+                    'satuan' => $value->satuan,
+                ];
+            }
+            $data['barang'] = $resultBarang;
+        } else {
+            $data['barang'] = null;
+        }
         $this->menu('admin/barang', $data);
     }
     // use for upload image produk
@@ -360,7 +389,10 @@ class Admin extends CI_Controller
     // data user
     public function data_user()
     {
-        $data['data_user'] = $this->model->get_data_user()->result_array();
+        $this->benchmark->mark('code_start');
+
+        $data['data_user'] = $this->user->get_data_user();
+        $this->benchmark->mark('code_end');
         $this->menu('admin/data_user', $data);
         //print_r($data);
     }
