@@ -32,7 +32,7 @@
                     <form action="<?=base_url();?>controller/tambah_keranjang/<?=$barang->id_produk?>" method="post">
 					<div class="s_product_text">
 						<h3><?=$barang->nama_produk?></h3>
-						<h2>Rp. <?=number_format($barang->harga_jual)?></h2>
+						<h2>Rp. <?=number_format($barang->harga_jual) . " /" . $barang->satuan?></h2>
 						<ul class="list">
 							<li><a class="active" href="#"><span>Jenis</span> : <?=$barang->jenis?></a></li>
 							<li><a href="#"><span>Status</span> : Ready Stock</a></li>
