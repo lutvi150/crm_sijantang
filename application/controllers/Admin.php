@@ -925,5 +925,37 @@ class Admin extends CI_Controller
         }
         echo json_encode($data);
     }
+    // use for setting menu
+    public function setting(Type $var = null)
+    {
+        $checkDiscount = $this->model->find_data('tb_setting', 'setting_name', 'discount')->row();
+        if ($checkDiscount == null) {
+            $insert = [
+                'setting_name' => 'discount',
+                'value' => json_encode([
+                    'minimal_transaksi' => 0,
+                    'persentase_dicount' => 0,
+                ]),
+            ];
+            $create = $this->model->create_data('tb_setting', $insert);
+            $insert['id_setting'] = $create;
+            $data['discount'] = (object) $insert;
+        } else {
+            $data['discount'] = $checkDiscount;
+        }
+        $this->menu('admin/setting', $data);
+    }
+    // use for update setting
+    public function update_setting(Type $var = null)
+    {
+        $update = [
+            'value' => json_encode([
+                'minimal_transaksi' => $this->input->post('minimal_transaksi'),
+                'persentase_discount' => $this->input->post('persentase_discount'),
+            ]),
+        ];
+        $this->model->update_data('tb_setting', 'id_setting', $this->input->post('id_setting'), $update);
+        echo json_encode(['status' => 'success', 'update' => $update]);
+    }
 
 }

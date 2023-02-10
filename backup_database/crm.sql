@@ -24,7 +24,7 @@ CREATE TABLE `tb_chat` (
   `chat` text,
   `status_baca` varchar(2) DEFAULT NULL,
   UNIQUE KEY `id_chat` (`id_chat`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_data_diri_user` (
   `id_user` int(10) NOT NULL AUTO_INCREMENT,
@@ -63,7 +63,7 @@ CREATE TABLE `tb_keranjang` (
   `status_item` varchar(30) NOT NULL,
   `total_harga` varchar(30) NOT NULL,
   PRIMARY KEY (`id_keranjang`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_produk` (
   `id_produk` int(20) NOT NULL AUTO_INCREMENT,
@@ -75,7 +75,14 @@ CREATE TABLE `tb_produk` (
   `harga_modal` int(20) DEFAULT NULL,
   `stock` int(20) DEFAULT NULL,
   PRIMARY KEY (`id_produk`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `tb_setting` (
+  `id_setting` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `setting_name` varchar(20) DEFAULT NULL,
+  `value` json DEFAULT NULL,
+  UNIQUE KEY `id_setting` (`id_setting`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_transaksi` (
   `id_transaksi` int(10) NOT NULL AUTO_INCREMENT,
@@ -91,8 +98,9 @@ CREATE TABLE `tb_transaksi` (
   `status_bayar` varchar(50) NOT NULL,
   `ongkir` varchar(30) NOT NULL,
   `alamat` text NOT NULL,
+  `discount` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_transaksi`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tb_user` (
   `id_user` int(10) NOT NULL AUTO_INCREMENT,
@@ -107,16 +115,28 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_bukti_bayar` (`id_bukti_bayar`, `nomor_transaksi`, `bukti_bayar`, `alasan`, `tgl_upload`) VALUES
 ('BB070120200001', '070120200003', 'upload/original_image/a5b35fe6a17aad42533b4f8d5ee3f127.png', '-', '07-01-2020');
 INSERT INTO `tb_bukti_bayar` (`id_bukti_bayar`, `nomor_transaksi`, `bukti_bayar`, `alasan`, `tgl_upload`) VALUES
-('BB241120190001', '161120190001', '/upload/thumb_image/068238f4236b06212f86f90e7f2d86fc.jpg', '-', '24-11-2019');
+('BB090220230001', '090220230001', 'upload/original_image/fea444ac6104f084046d749f5ad0e987.jpg', '-', '09-02-2023');
 INSERT INTO `tb_bukti_bayar` (`id_bukti_bayar`, `nomor_transaksi`, `bukti_bayar`, `alasan`, `tgl_upload`) VALUES
-('BB241120190002', '161120190001', '/upload/thumb_image/4d199ce5dbf9eec20d767f6d3203eef3.jpg', '-', '24-11-2019');
+('BB090220230002', '090220230002', 'upload/original_image/303ec07faaef6fa41446c4871f6f678c.jpg', '-', '09-02-2023');
 INSERT INTO `tb_bukti_bayar` (`id_bukti_bayar`, `nomor_transaksi`, `bukti_bayar`, `alasan`, `tgl_upload`) VALUES
+('BB241120190001', '161120190001', '/upload/thumb_image/068238f4236b06212f86f90e7f2d86fc.jpg', '-', '24-11-2019'),
+('BB241120190002', '161120190001', '/upload/thumb_image/4d199ce5dbf9eec20d767f6d3203eef3.jpg', '-', '24-11-2019'),
 ('BB241120190003', '161120190002', '/upload/thumb_image/1123913bf5e72a4c7d3d41827637375b.png', '-', '24-11-2019'),
 ('BB241120190004', '241120190001', '/upload/thumb_image/6f6f0cccfe4409297e6eab17bc2ea996.png', 'bukti bayar palsu ', '24-11-2019'),
 ('BB310120230001', '310120230001', 'upload/original_image/a44a8635423277066743fa1bad944e6d.jpg', '-', '31-01-2023'),
 ('BB310120230002', '310120230002', 'upload/original_image/a80e1b11ef6232055d5a12c5ba8e5a0d.jpg', '-', '31-01-2023');
 
-
+INSERT INTO `tb_chat` (`id_chat`, `id_user`, `sumber`, `tanggal_chat`, `chat`, `status_baca`) VALUES
+(1, 14, 'user', '02 Feb 2023 17:39:12', 'tesss', '1');
+INSERT INTO `tb_chat` (`id_chat`, `id_user`, `sumber`, `tanggal_chat`, `chat`, `status_baca`) VALUES
+(2, 14, 'user', '02 Feb 2023 17:55:23', 'tesss', '1');
+INSERT INTO `tb_chat` (`id_chat`, `id_user`, `sumber`, `tanggal_chat`, `chat`, `status_baca`) VALUES
+(3, 14, 'user', '02 Feb 2023 17:58:15', 'makan nasi', '1');
+INSERT INTO `tb_chat` (`id_chat`, `id_user`, `sumber`, `tanggal_chat`, `chat`, `status_baca`) VALUES
+(4, 14, 'user', '02 Feb 2023 17:58:20', '', '1'),
+(5, 11, 'user', '02 Feb 2023 18:11:51', 'hi admin, saya butuh bantuan', '1'),
+(6, 11, 'admin', '02 Feb 2023 18:40:42', 'ya apa yang bisa saya bantu', '1'),
+(7, 14, 'admin', '02 Feb 2023 18:41:31', 'baik, kendalanya akan kami proses', '1');
 
 INSERT INTO `tb_data_diri_user` (`id_user`, `nama`, `alamat`, `username`, `no_hp`, `foto`) VALUES
 (1, 'saya', 'Piliang Batusangkar', 'saya', '082285498049', '/upload/thumb_image/5788a2eff9d09cee4fe8d3bbe38ae3af.jpg');
@@ -151,21 +171,35 @@ INSERT INTO `tb_keranjang` (`id_keranjang`, `id_produk`, `jumlah_pesan`, `id_use
 INSERT INTO `tb_keranjang` (`id_keranjang`, `id_produk`, `jumlah_pesan`, `id_user`, `tgl_input`, `nomor_transaksi`, `status_item`, `total_harga`) VALUES
 (4, '3', '2', 'rudi', '31-01-2023', '310120230001', 'Finish', '60000'),
 (5, '4', '4', 'hadi', '31-01-2023', '310120230002', 'Finish', '360000'),
-(6, '3', '1', 'hadi', '31-01-2023', '310120230002', 'Finish', '30000');
+(6, '3', '1', 'hadi', '31-01-2023', '310120230002', 'Finish', '30000'),
+(7, '4', '1', 'hadi', '09-02-2023', '090220230001', 'Finish', '90000'),
+(8, '4', '3', 'hadi', '09-02-2023', '090220230001', 'Finish', '270000'),
+(9, '4', '1', 'hadi', '09-02-2023', '090220230001', 'Finish', '90000'),
+(10, '4', '3', 'hadi', '09-02-2023', '090220230001', 'Finish', '270000'),
+(11, '4', '2', 'hadi', '09-02-2023', '090220230002', 'Finish', '180000');
 
 INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `keterangan`, `jenis`, `harga_jual`, `satuan`, `harga_modal`, `stock`) VALUES
 (2, 'Jaguang', 'Isi dengan detail products', 'Kotak', 3000, 'Kilo', 2900, NULL);
 INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `keterangan`, `jenis`, `harga_jual`, `satuan`, `harga_modal`, `stock`) VALUES
 (3, 'Produk 1', 'Makanan khas desa sijantang', 'makanan', 30000, 'Makanan khas desa sijantang', 30000, 10);
 INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `keterangan`, `jenis`, `harga_jual`, `satuan`, `harga_modal`, `stock`) VALUES
-(4, 'Masakan Ikan', 'Bahan dari ikan pilhan, rasanya peda,', 'Makanan', 90000, 'Bahan dari ikan pilhan, rasanya peda,', 90000, 0);
+(4, 'Masakan Ikan', 'Bahan dari ikan pilhan, rasanya peda,', 'Makanan', 90000, 'Bahan dari ikan pilhan, rasanya peda,', 90000, 90);
+INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `keterangan`, `jenis`, `harga_jual`, `satuan`, `harga_modal`, `stock`) VALUES
+(5, '-', '-', '-', 0, '-', 0, 0);
 
-INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`) VALUES
-(1, '290120200001', 'saya', '39000', 'B', '29-01-2020', '-', '-', 'Biasa', 'mandiri', '', '5900', 'Provinsi Sumatera Utara KabupatenKAB. TAPANULI UTARA Kecamatan 1');
-INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`) VALUES
-(2, '310120230001', 'rudi', '60000', 'F', '31-01-2023', '31-01-2023', 'BB310120230001', 'Biasa', 'bri', '', '0', 'Di kirim atas nama rudi Dengan nomor kontak :082285498003 Alamat pengiriman:padang');
-INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`) VALUES
-(3, '310120230002', 'hadi', '390000', 'F', '31-01-2023', '31-01-2023', 'BB310120230002', 'Biasa', 'bri', '', '0', 'Di kirim atas nama Hadi Dengan nomor kontak :082285498004 Alamat pengiriman:Padang Provinsi Sumatera Barat');
+INSERT INTO `tb_setting` (`id_setting`, `setting_name`, `value`) VALUES
+(1, 'discount', '{\"minimal_transaksi\": \"3\", \"persentase_discount\": \"30\"}');
+
+
+INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`, `discount`) VALUES
+(1, '290120200001', 'saya', '39000', 'B', '29-01-2020', '-', '-', 'Biasa', 'mandiri', '', '5900', 'Provinsi Sumatera Utara KabupatenKAB. TAPANULI UTARA Kecamatan 1', NULL);
+INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`, `discount`) VALUES
+(2, '310120230001', 'rudi', '60000', 'F', '31-01-2023', '31-01-2023', 'BB310120230001', 'Biasa', 'bri', '', '0', 'Di kirim atas nama rudi Dengan nomor kontak :082285498003 Alamat pengiriman:padang', NULL);
+INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`, `discount`) VALUES
+(3, '310120230002', 'hadi', '390000', 'F', '31-01-2023', '31-01-2023', 'BB310120230002', 'Biasa', 'bri', '', '0', 'Di kirim atas nama Hadi Dengan nomor kontak :082285498004 Alamat pengiriman:Padang Provinsi Sumatera Barat', NULL);
+INSERT INTO `tb_transaksi` (`id_transaksi`, `nomor_transaksi`, `id_user`, `total_tagihan`, `status`, `tgl_transaksi`, `tgl_selesai`, `id_bukti_bayar`, `jenis_transaksi`, `bank`, `status_bayar`, `ongkir`, `alamat`, `discount`) VALUES
+(4, '090220230001', 'hadi', '270000', 'F', '09-02-2023', '08-02-2023', 'BB090220230001', 'Biasa', 'bri', '', '0', 'Di kirim atas nama Hadi Dengan nomor kontak :082285498004 Alamat pengiriman:Padang Provinsi Sumatera Barat', '0'),
+(5, '090220230002', 'hadi', '180000', 'F', '09-02-2023', '02-02-2023', 'BB090220230002', 'Biasa', 'bri', '', '0', 'Di kirim atas nama Hadi Dengan nomor kontak :082285498004 Alamat pengiriman:Padang Provinsi Sumatera Barat', '0');
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`, `status_data`, `tgl_registrasi`) VALUES
 (1, '12', '21232f297a57a5a743894a0e4a801fc3', 'pelanggan', 'Belum', '24-09-2019');

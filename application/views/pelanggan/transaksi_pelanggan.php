@@ -191,5 +191,20 @@ foreach ($transaksi as $field2):
 		</div>
 	</div>
 </div>
+<script>
+	$(".detail-pesanan").click(function (e) {
+		e.preventDefault();
+		let nomor_transaksi=$(this).attr('data')
+		$.ajax({
+			type: "POST",
+			url: "<?=?>url",
+			data: "data",
+			dataType: "dataType",
+			success: function (response) {
+				
+			}
+		});
+	});
+</script>
 
 

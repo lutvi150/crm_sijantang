@@ -62,6 +62,11 @@
 					<i class="fa fa-book"></i> <span>Chat</span>
 				</a>
 			</li>
+			<li>
+				<a href="<?=base_url(); ?>admin/setting">
+					<i class="fa fa-wrench"></i> <span>Setting</span>
+				</a>
+			</li>
 			<?php elseif ($this->session->userdata('level') == 'pelanggan'): ?>
 			<!-- use this for use menu -->
 			<li class="">

@@ -211,6 +211,17 @@ class Controller extends CI_Controller
                 $hasil[] = $value['total_harga'];
             }
             $total_belanja = array_sum($hasil);
+            // use for check discount
+            $check_dicount = $this->model->find_data('tb_setting', 'setting_name', 'discount')->row();
+            $total_discount = 0;
+            if ($check_dicount !== null) {
+                $discount = json_decode($check_dicount->value);
+                $count_transaksi = $this->model->jml_tran_proses($id_user, 'F')->num_rows();
+                if ($count_transaksi % $discount->minimal_transaksi == 0) {
+                    $total_discount = $total_belanja * $discount->persentase_discount;
+                    $total_belanja = $total_belanja - $total_discount;
+                }
+            }
             $data =
                 [
                 'nomor_transaksi' => $nomor_transaksi,
@@ -224,6 +235,7 @@ class Controller extends CI_Controller
                 'bank' => $bank,
                 'status_bayar' => '',
                 'ongkir' => 0,
+                'discount' => $total_discount,
                 'alamat' => 'Di kirim atas nama ' . $nama_penerima . ' Dengan nomor kontak :' . $nomor_kontak . " Alamat pengiriman:" . $alamat,
             ];
             // print_r($data);
