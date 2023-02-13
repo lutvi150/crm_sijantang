@@ -109,21 +109,21 @@
 		$('#konfirmasi').modal('show');
 	});
 	// untuk melihat detail pesanan
-	$('.detail-pesanan').click(function (e) {
-		var id=$(this).attr('data');
-		$.ajax({
-			type: "GET",
-			url: "<?=base_url();?>pelanggan/detail_transaksi",
-			data: {"id":id},
-			dataType: "json",
-			success: function (response) {
+	// $('.detail-pesanan').click(function (e) {
+	// 	var id=$(this).attr('data');
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: "<?=base_url();?>pelanggan/detail_transaksi",
+	// 		data: {"id":id},
+	// 		dataType: "json",
+	// 		success: function (response) {
 
 
 
-		$('#detail_pesanan').modal('show');
-			}
-		});
-	});
+	// 	$('#detail_pesanan').modal('show');
+	// 		}
+	// 	});
+	// });
 	// untuk upload bukti bayar
 	$('.upload-bukti').click(function (e) {
 		var id=$(this).attr('data');

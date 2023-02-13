@@ -92,7 +92,8 @@ foreach ($transaksi as $field2):
 									<td>
 									<?php if ($field2['status'] == 'B'): ?>
 										<a href="#" class="btn btn-success btn-xs upload-bukti" data="<?=$field2['nomor_transaksi']?>"><i class="fa fa-upload"></i> Upload Bukti Bayar</a>
-
+										<?php elseif ($field2['status'] == 'F'): ?>
+											<a href="<?=base_url('pelanggan/ulasan/' . $field2['id_transaksi']);?>" class="btn btn-success btn-xs">Ulasan</a>
 									<?php endif;?>
 									</td>
 								</tr>
@@ -197,14 +198,27 @@ foreach ($transaksi as $field2):
 		let nomor_transaksi=$(this).attr('data')
 		$.ajax({
 			type: "POST",
-			url: "<?=?>url",
-			data: "data",
-			dataType: "dataType",
+			url: "<?=base_url('pelanggan/detail_transaksi_priview');?>",
+			data: {id:nomor_transaksi},
+			dataType: "JSON",
 			success: function (response) {
-				
+				let produk=null;
+				$.each(response.jenis_barang, function (index, value) {
+					 produk+=`<tr>
+								<td>${value.nama_produk}</td>
+								<td>Rp. ${value.harga_jual}</td>
+								<td>${value.jumlah_pesan}</td>
+								<td>Rp. ${value.total_harga}</td>
+							</tr>`
+				});
+				$("#total_bayar").text("Rp."+response.data_transaksi.total_tagihan);
+				$("#terbilang").text(response.terbilang)
+				$(".banyak_barang").html(produk);
+				$("#detail_pesanan").modal("show");
 			}
 		});
 	});
 </script>
 
 
+N

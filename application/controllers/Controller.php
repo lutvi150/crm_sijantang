@@ -57,9 +57,19 @@ class Controller extends CI_Controller
     }
     public function detail_barang($id_produk)
     {
+
+        // redirect('controller/detail_barang_costume');
+        // exit;
         $data['barang'] = $this->model->find_data('tb_produk', 'id_produk', $id_produk)->row();
         $data['foto'] = $this->model->find_data('tb_foto_produk', 'id_produk', $id_produk)->result();
         $this->menu('detail_barang', $data);
+    }
+    // costume detal
+    public function detail_barang_costume(Type $var = null)
+    {
+        $data = null;
+        $this->load->view('detail_barang_c', $data, false);
+
     }
     public function login()
     {
