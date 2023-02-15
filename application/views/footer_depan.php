@@ -13,7 +13,7 @@
 
 <script src="<?=base_url();?>assets/js/vendor/jquery-2.2.4.min.js"></script>
 <!-- bootsrap js -->
-<script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- <script src="<?=base_url();?>assets/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <script src="<?=base_url();?>assets/js/vendor/popper.js">
 </script>
 <script src="<?=base_url();?>assets/js/vendor/bootstrap.min.js"></script>
@@ -268,8 +268,6 @@
 	$('.belum-belanja').click(function(e) {
 		$('#belum_belanja').modal('show');
 	});
-	// ck edit uniq reqeust
-	CKEDITOR.replace('keterangan');
 </script>
 </body>
 

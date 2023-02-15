@@ -46,6 +46,11 @@ class Pelanggan extends CI_Controller
         $data['transaksi'] = $this->model->find_data('tb_transaksi', 'id_user', $username)->result_array();
         $this->menu('pelanggan/transaksi_pelanggan', $data);
     }
+    // use for review
+    public function FunctionName($id_transaksi)
+    {
+        $transaksi = $this->model->find_data('tb_transaksi', 'id_transaksi', $id_transaksi)->result();
+    }
     // upload bukti bayar
     public function upload_bukti_bayar()
     {
@@ -84,6 +89,15 @@ class Pelanggan extends CI_Controller
     {
         $id = $this->input->get('id');
         $data['keranjang'] = $this->model->find_data('tb_keranjang', 'nomor_transaksi', $id)->result_array();
+        echo json_encode($data);
+    }
+    public function detail_transaksi_priview()
+    {
+        //$id='161120190001';
+        $id = $this->input->post('id');
+        $data['data_transaksi'] = $this->model->detail_transaksi($id)->row_array();
+        $data['jenis_barang'] = $this->model->detail_barang_dipesan($id)->result_array();
+        $data['terbilang'] = $this->penyebut($data['data_transaksi']['total_tagihan']) . ' Rupiah';
         echo json_encode($data);
     }
 
@@ -209,7 +223,7 @@ class Pelanggan extends CI_Controller
     public function upload($nama)
     {
         $config['upload_path'] = './upload/original_image/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['encrypt_name'] = true;
         $this->load->library('upload', $config);
 
@@ -260,4 +274,44 @@ class Pelanggan extends CI_Controller
         $chat = $this->chat->get_chat($id);
         echo json_encode($chat);
     }
+    // proses
+    public function penyebut($nilai)
+    {
+        $nilai = abs($nilai);
+        $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+        $temp = "";
+        if ($nilai < 12) {
+            $temp = " " . $huruf[$nilai];
+        } else if ($nilai < 20) {
+            $temp = $this->penyebut($nilai - 10) . " Belas";
+        } else if ($nilai < 100) {
+            $temp = $this->penyebut($nilai / 10) . " Puluh" . $this->penyebut($nilai % 10);
+        } else if ($nilai < 200) {
+            $temp = " Seratus" . $this->penyebut($nilai - 100);
+        } else if ($nilai < 1000) {
+            $temp = $this->penyebut($nilai / 100) . " Ratus" . $this->penyebut($nilai % 100);
+        } else if ($nilai < 2000) {
+            $temp = " Seribu" . $this->penyebut($nilai - 1000);
+        } else if ($nilai < 1000000) {
+            $temp = $this->penyebut($nilai / 1000) . " Ribu" . $this->penyebut($nilai % 1000);
+        } else if ($nilai < 1000000000) {
+            $temp = $this->penyebut($nilai / 1000000) . " Juta" . $this->penyebut($nilai % 1000000);
+        } else if ($nilai < 1000000000000) {
+            $temp = $this->penyebut($nilai / 1000000000) . " Milyar" . $this->penyebut(fmod($nilai, 1000000000));
+        } else if ($nilai < 1000000000000000) {
+            $temp = $this->penyebut($nilai / 1000000000000) . " Trilyun" . $this->penyebut(fmod($nilai, 1000000000000));
+        }
+        return $temp;
+    }
+
+    public function terbilang($nilai)
+    {
+        if ($nilai < 0) {
+            $hasil = "minus " . trim(penyebut($nilai));
+        } else {
+            $hasil = trim(penyebut($nilai));
+        }
+        return $hasil;
+    }
+
 }
