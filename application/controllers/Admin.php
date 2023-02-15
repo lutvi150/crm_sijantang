@@ -934,7 +934,7 @@ class Admin extends CI_Controller
                 'setting_name' => 'discount',
                 'value' => json_encode([
                     'minimal_transaksi' => 0,
-                    'persentase_dicount' => 0,
+                    'persentase_discount' => 0,
                 ]),
             ];
             $create = $this->model->create_data('tb_setting', $insert);

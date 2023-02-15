@@ -197,11 +197,11 @@ foreach ($transaksi as $field2):
 		let nomor_transaksi=$(this).attr('data')
 		$.ajax({
 			type: "POST",
-			url: "<?=?>url",
+			url: "<?=base_url();?>url",
 			data: "data",
 			dataType: "dataType",
 			success: function (response) {
-				
+
 			}
 		});
 	});
