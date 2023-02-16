@@ -229,7 +229,7 @@ class Controller extends CI_Controller
                 if ($discount->minimal_transaksi > 0) {
                     $count_transaksi = $this->model->jml_tran_proses($id_user, 'F')->num_rows();
                     if ($count_transaksi % $discount->minimal_transaksi == 0) {
-                        $total_discount = $total_belanja * $discount->persentase_discount;
+                        $total_discount = $total_belanja * ($discount->persentase_discount / 100);
                         $total_belanja = $total_belanja - $total_discount;
                     }
                 }
