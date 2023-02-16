@@ -226,10 +226,12 @@ class Controller extends CI_Controller
             $total_discount = 0;
             if ($check_dicount !== null) {
                 $discount = json_decode($check_dicount->value);
-                $count_transaksi = $this->model->jml_tran_proses($id_user, 'F')->num_rows();
-                if ($count_transaksi % $discount->minimal_transaksi == 0) {
-                    $total_discount = $total_belanja * $discount->persentase_discount;
-                    $total_belanja = $total_belanja - $total_discount;
+                if ($discount->minimal_transaksi > 0) {
+                    $count_transaksi = $this->model->jml_tran_proses($id_user, 'F')->num_rows();
+                    if ($count_transaksi % $discount->minimal_transaksi == 0) {
+                        $total_discount = $total_belanja * $discount->persentase_discount;
+                        $total_belanja = $total_belanja - $total_discount;
+                    }
                 }
             }
             $data =
